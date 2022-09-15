@@ -12,10 +12,11 @@ interface IMovable
 }
 interface IRotatable
 {
-
+    int getAngle();
+    void setAngle(int angle);
 }
 
-public class Ship : IMovable, IRotatable
+public class Ship : IMovable
 {
     double[] _coords;
     double[] _speed_vector;
