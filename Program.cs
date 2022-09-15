@@ -47,7 +47,7 @@ public class Ship : IMovable
     }
     public void Print()
     {
-        Console.WriteLine($"{_coords[0].ToString()}, {_coords[1].ToString()}");
+        Console.WriteLine(String.Join(", ", _coords.ToList()));
     }
 }
 
@@ -55,21 +55,25 @@ class Movement
 {
     public static void Move(IMovable obj)
     {
-        double[] coords = obj.getCoords();
-        for (int i = 0; i < coords.Length; i++)
-        {
-            coords[i] += obj.getSpeed()[i];
-        }
-        obj.setCoords(coords);
+        obj.setCoords(obj.getCoords().Zip(obj.getSpeed(), (a, b) => a + b).ToArray());
     }
 }
+
+class Rotation
+{
+    public static void Rotate(IRotatable obj)
+    {
+        
+    }
+}
+
 
 
 class Program
 {
     static void Main()
     {
-        Ship ship = new Ship(new double[] { 12, 5 }, new double[] { -7, 3 });
+        Ship ship = new Ship(new double[] { 12, 5, 1 }, new double[] { -7, 3, -1 });
         Movement.Move(ship);
         ship.Print();
         Movement.Move(ship);
