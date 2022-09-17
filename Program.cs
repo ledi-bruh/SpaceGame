@@ -35,10 +35,11 @@ namespace SpaceGame
         //! Q: поворот для 2-мерного?
         public Ship(double[] coords, double[] speed_vector, int angularSpeed = 45)
         {
-            if (coords.Length != speed_vector.Length)
-            {
-                throw new ArgumentException("Не сопадают размерности векторов coords и speed_vector");
-            }
+            //! Q: МБ В КОНСТРУКТОРЕ?
+            // if (coords.Length != speed_vector.Length)
+            // {
+            //     throw new ArgumentException("Не сопадают размерности векторов coords и speed_vector");
+            // }
             _coords = coords;
             _speed_vector = speed_vector;
             _angle = (int)(Math.Atan2(_speed_vector[1], _speed_vector[0]) * (180 / Math.PI));
@@ -71,7 +72,20 @@ namespace SpaceGame
 
     class Movement
     {
-        public static void Move(IMovable obj) => obj.setCoords(obj.getCoords().Zip(obj.getSpeed(), (a, b) => a + b).ToArray());
+        public static void Move(IMovable obj)
+        {
+
+            if (obj.getCoords().Length == 0)
+            {
+                throw new ArgumentException("No coordinates");
+            }
+            if (obj.getSpeed().Length == 0)
+            {
+                throw new ArgumentException("No speed vector");
+            }
+            obj.setCoords(obj.getCoords().Zip(obj.getSpeed(), (a, b) => a + b).ToArray());
+
+        }
     }
 
     class Rotation
@@ -94,7 +108,7 @@ namespace SpaceGame
     {
         static void Main()
         {
-            Ship ship = new Ship(new double[] { 12, 5 }, new double[] { -7, 3 });
+            Ship ship = new Ship(new double[] {2,5 }, new double[] { -7, 3 });
             Movement.Move(ship);
             ship.Print();
             Movement.Move(ship);
@@ -114,7 +128,7 @@ namespace SpaceGame
 
             Rotation.Rotate(ship);
             ship.Print();
-            
+
         }
     }
 }
