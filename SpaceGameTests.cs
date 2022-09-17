@@ -1,8 +1,6 @@
+﻿using SpaceGame;
 using Xunit;
-using SpaceGame;
-using System.Diagnostics.CodeAnalysis;
 
-[ExcludeFromCodeCoverage]
 public class SpaceGameTests
 {
     [Fact]
