@@ -1,7 +1,6 @@
-﻿using SpaceGame;
-using Xunit;
+﻿namespace SpaceGame.Tests;
 
-public class SpaceGameTests
+public class UnitTest1
 {
     [Fact]
     public void MoveShip()
@@ -9,7 +8,8 @@ public class SpaceGameTests
         // Arrange
         double[] startPos = new double[] { 12, 5 };
         double[] speedVector = new double[] { -7, 3 };
-        double[] expected = new double[] { 5, 8 };
+        double[] expected = new double[] { 5, 8 }
+        ;
 
         // Act
         Ship ship = new Ship(startPos, speedVector);
