@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v3
 
@@ -18,6 +19,11 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+      
+    - run: dotnet new console --framework net6.0 -n "SpaceGame" -o "src"
+    - run: dotnet new xunit -n SpaceGame.Tests -o test
+    - run: dotnet add .\test\SpaceGame.Tests.csproj reference .\src\SpaceGame.csproj
+    - run: dotnet add .\test\SpaceGame.Tests.csproj package coverlet.msbuild
 
     - name: Restore dependencies
       run: dotnet restore
@@ -25,6 +31,8 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../coverage/lcov.info .\test
+    
     - name: Test
       run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=../coverage/lcov.info .\test
     
