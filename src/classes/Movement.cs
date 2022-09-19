@@ -7,11 +7,10 @@
         {
             throw new ArgumentException("No coordinates");
         }
-        if (obj.getSpeed().Length == 0)
-        {
-            throw new ArgumentException("No speed vector");
-        }
-        obj.setCoords(obj.getCoords().Zip(obj.getSpeed(), (a, b) => a + b).ToArray());  // a + b не округляется
-
+        double[] speedVector = new double[] {
+            Math.Round(obj.getNorma() * Math.Cos(obj.getAngleDirection())),
+            Math.Round(obj.getNorma() * Math.Sin(obj.getAngleDirection()))
+        };
+        obj.setCoords(obj.getCoords().Zip(speedVector, (a, b) => a + b).ToArray());  // Math.Round(a + b)?
     }
 }

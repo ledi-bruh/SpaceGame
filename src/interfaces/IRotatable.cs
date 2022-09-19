@@ -1,6 +1,5 @@
-﻿interface IRotatable
+﻿interface IRotatable : IEntity
 {
-    double getAngle();
-    void setAngle(double angle);
     double getAngularSpeed();
+    void setAngleDirection(double angle);
 }

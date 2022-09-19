@@ -393,4 +393,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-./coverage/lcov.info
+*/coverage/lcov.info
+*/lcov.info

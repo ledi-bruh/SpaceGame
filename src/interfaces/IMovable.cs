@@ -1,6 +1,5 @@
-﻿public interface IMovable
+﻿public interface IMovable : IEntity
 {
-    double[] getCoords();
+    double getNorma();
     void setCoords(double[] coords);
-    double[] getSpeed();
 }
