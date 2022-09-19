@@ -2,7 +2,6 @@
 {
     public static void Move(IMovable obj)
     {
-
         if (obj.getCoords().Length == 0)
         {
             throw new ArgumentException("No coordinates");

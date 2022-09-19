@@ -1,8 +1,10 @@
 ﻿namespace SpaceGame;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 class Program
 {
+    [ExcludeFromCodeCoverage]
     static void Main()
     {
         // Ship ship = new Ship(new double[] { 5, 2 }, new double[] { 1, 1 });

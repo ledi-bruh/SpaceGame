@@ -1,4 +1,6 @@
-﻿public class Ship : IMovable, IRotatable
+﻿using System.Diagnostics.CodeAnalysis;
+
+public class Ship : IMovable, IRotatable
 {
     double[] _coords;
     double _norma;
@@ -17,18 +19,14 @@
         _norma = Math.Sqrt(speed_vector.Select(x => x * x).Sum());
         _angleDirection = Math.Atan2(speed_vector[1], speed_vector[0]);
         _angularSpeed = angularSpeed;
-        Console.WriteLine($"Position: ({String.Join(", ", _coords)})\tNorma: {_norma}\n" +
-                          $"Angle direction: {_angleDirection}\tAngular Speed: {_angularSpeed}\n");
     }
-    public Ship(double[] coords, double angleDirection, double norma, double angularSpeed = Math.PI / 4)
+    public Ship(double[] coords, double angleDirection, double norma = 1, double angularSpeed = Math.PI / 4)
     {
         _coords = coords;
         //! Q: угол [0:2pi]?
         _angleDirection = angleDirection;
         _norma = norma;
         _angularSpeed = angularSpeed;
-        Console.WriteLine($"Position: ({String.Join(", ", _coords)})\tNorma: {_norma}\n" +
-                          $"Angle direction: {_angleDirection}\tAngular Speed: {_angularSpeed}\n");
     }
     public double[] getCoords() => _coords;
     public void setCoords(double[] coords) => _coords = coords;
@@ -36,6 +34,8 @@
     public double getAngleDirection() => _angleDirection;
     public void setAngleDirection(double angleDirection) => _angleDirection = angleDirection;
     public double getAngularSpeed() => _angularSpeed;
+
+    [ExcludeFromCodeCoverage]
     public void Print()
     {
         Console.WriteLine($"Position: ({String.Join(", ", _coords)})\tNorma: {_norma}\n" +

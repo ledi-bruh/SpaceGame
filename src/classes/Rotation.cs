@@ -1,4 +1,4 @@
-﻿class Rotation
+﻿public class Rotation
 {
     public static void Rotate(IRotatable obj)
     {
