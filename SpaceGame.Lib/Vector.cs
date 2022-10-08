@@ -19,7 +19,6 @@ public class Vector
         if (ReferenceEquals(obj, null) || this.GetType() != obj.GetType()) return false;
         if (ReferenceEquals(this, obj)) return true;
         return obj is Vector vector &&
-               Size == vector.Size &&
                _elements.SequenceEqual(vector._elements);
     }
     public override int GetHashCode()

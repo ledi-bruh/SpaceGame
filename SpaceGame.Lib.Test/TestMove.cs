@@ -2,7 +2,7 @@ namespace SpaceGame.Lib.Test;
 using Moq;
 using Vector;
 
-public class UnitTest1
+public class TestMove
 {
     //* Для объекта, находящегося в точке (12, 5) и движущегося со скоростью (-7, 3) движение меняет положение объекта на (5, 8)
     [Fact]
@@ -26,13 +26,13 @@ public class UnitTest1
         Mock<IMovable> mock = new Mock<IMovable>();
         mock
         .Setup(x => x.Position)
-        .Throws(new ArgumentException("Can't read object.Position"))
+        .Throws(new Exception("Can't read object.Position"))
         .Verifiable();
 
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
         var expected = "Can't read object.Position";
-        var error = Assert.Throws<ArgumentException>(() => moveCommand.Execute());
+        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
         Assert.Equal(error.Message, expected);
     }
 
@@ -43,13 +43,13 @@ public class UnitTest1
         Mock<IMovable> mock = new Mock<IMovable>();
         mock
         .Setup(x => x.Velocity)
-        .Throws(new ArgumentException("Can't read object.Velocity"))
+        .Throws(new Exception("Can't read object.Velocity"))
         .Verifiable();
 
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
         var expected = "Can't read object.Velocity";
-        var error = Assert.Throws<ArgumentException>(() => moveCommand.Execute());
+        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
         Assert.Equal(error.Message, expected);
     }
 
@@ -62,13 +62,13 @@ public class UnitTest1
         mock.SetupGet(x => x.Velocity).Returns(new Vector()).Verifiable();
         mock
         .SetupSet(x => x.Position = It.IsAny<Vector>())
-        .Throws(new ArithmeticException("Can't change object.Position"))
+        .Throws(new Exception("Can't change object.Position"))
         .Verifiable();
 
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
         var expected = "Can't change object.Position";
-        var error = Assert.Throws<ArithmeticException>(() => moveCommand.Execute());
+        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
         Assert.Equal(error.Message, expected);
     }
 }
