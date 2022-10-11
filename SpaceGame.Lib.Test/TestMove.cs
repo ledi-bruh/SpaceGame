@@ -9,14 +9,13 @@ public class TestMove
     public void TestMoving()
     {
         Mock<IMovable> mock = new Mock<IMovable>();
-        mock.Setup(x => x.Position).Returns(new Vector(12, 5)).Verifiable();
-        mock.Setup(x => x.Velocity).Returns(new Vector(-7, 3)).Verifiable();
-
+        mock.SetupGet(x => x.Position).Returns(new Vector(12, 5)).Verifiable();
+        mock.SetupGet(x => x.Velocity).Returns(new Vector(-7, 3)).Verifiable();
         MoveCommand moveCommand = new MoveCommand(mock.Object);
+
         moveCommand.Execute();
 
-        var expected = new Vector(5, 8);
-        mock.VerifySet(x => x.Position = expected, Times.Once);
+        mock.VerifySet(x => x.Position = new Vector(5, 8), Times.Once);
     }
 
     //* Попытка сдвинуть объект, у которого невозможно прочитать положение объекта в пространстве, приводит к ошибке
@@ -24,16 +23,10 @@ public class TestMove
     public void CantReadPositionInMoving()
     {
         Mock<IMovable> mock = new Mock<IMovable>();
-        mock
-        .Setup(x => x.Position)
-        .Throws(new Exception("Can't read object.Position"))
-        .Verifiable();
-
+        mock.SetupGet(x => x.Position).Throws(new Exception()).Verifiable();
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
-        var expected = "Can't read object.Position";
-        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => moveCommand.Execute());
     }
 
     //* Попытка сдвинуть объект, у которого невозможно прочитать значение мгновенной скорости, приводит к ошибке
@@ -41,16 +34,10 @@ public class TestMove
     public void CantReadVelocityInMoving()
     {
         Mock<IMovable> mock = new Mock<IMovable>();
-        mock
-        .Setup(x => x.Velocity)
-        .Throws(new Exception("Can't read object.Velocity"))
-        .Verifiable();
-
+        mock.SetupGet(x => x.Velocity).Throws(new Exception()).Verifiable();
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
-        var expected = "Can't read object.Velocity";
-        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => moveCommand.Execute());
     }
 
     //* Попытка сдвинуть объект, у которого невозможно изменить положение в пространстве, приводит к ошибке
@@ -60,15 +47,9 @@ public class TestMove
         Mock<IMovable> mock = new Mock<IMovable>();
         mock.SetupGet(x => x.Position).Returns(new Vector()).Verifiable();
         mock.SetupGet(x => x.Velocity).Returns(new Vector()).Verifiable();
-        mock
-        .SetupSet(x => x.Position = It.IsAny<Vector>())
-        .Throws(new Exception("Can't change object.Position"))
-        .Verifiable();
-
+        mock.SetupSet(x => x.Position = It.IsAny<Vector>()).Throws(new Exception()).Verifiable();
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 
-        var expected = "Can't change object.Position";
-        var error = Assert.Throws<Exception>(() => moveCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => moveCommand.Execute());
     }
 }

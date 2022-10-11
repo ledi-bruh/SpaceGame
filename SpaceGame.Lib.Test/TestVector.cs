@@ -4,19 +4,19 @@ using Vector;
 public class TestVector
 {
     [Fact]
-    public void TestEqualSizeTrue()
+    public void TestIsEqualSizeTrue()
     {
         Vector A = new Vector(5, 1);
         Vector B = new Vector(0, 0);
-        Assert.True(Vector.EqualSize(A, B));
+        Assert.True(Vector.IsEqualSize(A, B));
     }
 
     [Fact]
-    public void TestEqualSizeFalse()
+    public void TestIsEqualSizeFalse()
     {
         Vector A = new Vector();
         Vector B = new Vector(0);
-        Assert.False(Vector.EqualSize(A, B));
+        Assert.False(Vector.IsEqualSize(A, B));
     }
 
     [Fact]
@@ -36,7 +36,23 @@ public class TestVector
     }
 
     [Fact]
-    public void TestSum()
+    public void TestGetHashCodeTrue()
+    {
+        Vector A = new Vector(547, 212, 589123893, -901230000, 17000999);
+        Vector B = new Vector(547, 212, 589123893, -901230000, 17000999);
+        Assert.Equal(A.GetHashCode(), B.GetHashCode());
+    }
+
+    [Fact]
+    public void TestGetHashCodeFalse()
+    {
+        Vector A = new Vector(547, 212, 589123893, -901230000, 17000999);
+        Vector B = new Vector(-901230000, 17000999, 547, 589123893, 212);
+        Assert.NotEqual(A.GetHashCode(), B.GetHashCode());
+    }
+
+    [Fact]
+    public void TestSumTrue()
     {
         Vector A = new Vector(1, 2, 3);
         Vector B = new Vector(-1, -2, -3);
@@ -50,8 +66,6 @@ public class TestVector
         Vector A = new Vector(1, 2, 3);
         Vector B = new Vector(-1, -2);
 
-        var expected = "Dimensions do not match";
-        var error = Assert.Throws<ArgumentException>(() => A + B);
-        Assert.Equal(error.Message, expected);
+        Assert.Equal(Assert.Throws<ArgumentException>(() => A + B).Message, "Dimensions do not match");
     }
 }
