@@ -10,8 +10,6 @@ public class Vector
 
     public override bool Equals(object? obj)
     {
-        if (ReferenceEquals(obj, null) || this.GetType() != obj.GetType()) return false;
-        if (ReferenceEquals(this, obj)) return true;
         return obj is Vector vector && this._elements.SequenceEqual(vector._elements);
     }
 

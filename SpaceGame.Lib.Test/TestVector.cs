@@ -32,7 +32,10 @@ public class TestVector
     {
         Vector A = new Vector(1, 2, 3);
         Vector B = new Vector(1, 2);
+        int b = 1;
+
         Assert.NotEqual(A, B);
+        Assert.False(A.Equals(b));
     }
 
     [Fact]
