@@ -8,4 +8,5 @@ public class RotateCommand : ICommand
         this._rotatable = obj;
     }
     public void Execute() => this._rotatable.Direction += this._rotatable.AngularVelocity;
+    //! Direction = (int)Round(Direction * Матрица поворота от AngleVelocity * Math.PI/180)
 }

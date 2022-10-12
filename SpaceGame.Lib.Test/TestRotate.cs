@@ -9,14 +9,13 @@ public class TestRotate
     public void TestRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock.Setup(x => x.Direction).Returns(45).Verifiable();
-        mock.Setup(x => x.AngularVelocity).Returns(90).Verifiable();
-
+        mock.SetupGet(x => x.Direction).Returns(45).Verifiable();
+        mock.SetupGet(x => x.AngularVelocity).Returns(90).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
+
         rotateCommand.Execute();
 
-        int expected = 135;
-        mock.VerifySet(x => x.Direction = expected, Times.Once);
+        mock.VerifySet(x => x.Direction = 135, Times.Once);
     }
 
     //* Попытка сдвинуть корабль, у которого невозможно прочитать значение угла наклона к горизонту, приводит к ошибке.
@@ -24,16 +23,10 @@ public class TestRotate
     public void CantReadDirectionInRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock
-        .Setup(x => x.Direction)
-        .Throws(new Exception("Can't read object.Direction"))
-        .Verifiable();
-
+        mock.Setup(x => x.Direction).Throws(new Exception()).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
-        var expected = "Can't read object.Direction";
-        var error = Assert.Throws<Exception>(() => rotateCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => rotateCommand.Execute());
     }
 
     //* Попытка сдвинуть корабль, у которого невозможно прочитать значение угловой скорости, приводит к ошибке.
@@ -41,32 +34,20 @@ public class TestRotate
     public void CantReadAngularVelocityInRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock
-        .Setup(x => x.AngularVelocity)
-        .Throws(new Exception("Can't read object.AngularVelocity"))
-        .Verifiable();
-
+        mock.Setup(x => x.AngularVelocity).Throws(new Exception()).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
-        var expected = "Can't read object.AngularVelocity";
-        var error = Assert.Throws<Exception>(() => rotateCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => rotateCommand.Execute());
     }
 
-    //* Попытка сдвинуть корабль, у которого изменить угол наклона к горизонту, приводит к ошибке.
+    //* Попытка сдвинуть корабль, у которого невозможно изменить угол наклона к горизонту, приводит к ошибке.
     [Fact]
     public void CantChangeDirectionInRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock
-        .SetupSet(x => x.Direction = It.IsAny<int>())
-        .Throws(new Exception("Can't change object.Direction"))
-        .Verifiable();
-
+        mock.SetupSet(x => x.Direction = It.IsAny<int>()).Throws(new Exception()).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
-        var expected = "Can't change object.Direction";
-        var error = Assert.Throws<Exception>(() => rotateCommand.Execute());
-        Assert.Equal(error.Message, expected);
+        Assert.Throws<Exception>(() => rotateCommand.Execute());
     }
 }
