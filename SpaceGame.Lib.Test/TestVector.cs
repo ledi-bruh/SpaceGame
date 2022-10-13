@@ -14,8 +14,8 @@ public class TestVector
     [Fact]
     public void TestIsEqualSizeFalse()
     {
-        Vector A = new Vector();
-        Vector B = new Vector(0);
+        Vector A = new Vector(0);
+        Vector B = new Vector(0, 0);
         Assert.False(Vector.IsEqualSize(A, B));
     }
 
@@ -69,6 +69,6 @@ public class TestVector
         Vector A = new Vector(1, 2, 3);
         Vector B = new Vector(-1, -2);
 
-        Assert.Equal(Assert.Throws<ArgumentException>(() => A + B).Message, "Dimensions do not match");
+        Assert.Equal("Dimensions do not match", Assert.Throws<ArgumentException>(() => A + B).Message);
     }
 }
