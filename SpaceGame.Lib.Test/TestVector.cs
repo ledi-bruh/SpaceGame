@@ -6,9 +6,7 @@ public class TestVector
     [Fact]
     public void TestNotEmptyVector()
     {
-        Vector A = new Vector();
-        
-        Assert.Equal(1, A.Size);
+        Assert.Equal("Invalid params", Assert.Throws<ArgumentException>(() => new Vector()).Message);
     }
 
     [Fact]

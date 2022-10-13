@@ -45,8 +45,8 @@ public class TestMove
     public void CantChangePositionInMoving()
     {
         Mock<IMovable> mock = new Mock<IMovable>();
-        mock.SetupGet(x => x.Position).Returns(new Vector()).Verifiable();
-        mock.SetupGet(x => x.Velocity).Returns(new Vector()).Verifiable();
+        mock.SetupGet(x => x.Position).Returns(new Vector(0)).Verifiable();
+        mock.SetupGet(x => x.Velocity).Returns(new Vector(0)).Verifiable();
         mock.SetupSet(x => x.Position = It.IsAny<Vector>()).Throws(new Exception()).Verifiable();
         MoveCommand moveCommand = new MoveCommand(mock.Object);
 

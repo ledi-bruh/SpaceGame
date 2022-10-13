@@ -4,8 +4,11 @@ public class Vector
 {
     private readonly int[] _elements;
     public int Size => _elements.Length;
-    public Vector() => this._elements = new int[] {0};
-    public Vector(params int[] elements) => this._elements = elements;
+    public Vector(params int[] elements)
+    {
+        if (elements.Length == 0) throw new ArgumentException("Invalid params");
+        this._elements = elements;
+    }
 
     public override bool Equals(object? obj)
     {
