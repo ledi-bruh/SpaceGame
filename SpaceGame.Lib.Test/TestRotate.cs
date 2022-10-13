@@ -50,4 +50,17 @@ public class TestRotate
 
         Assert.Throws<Exception>(() => rotateCommand.Execute());
     }
+    
+    [Fact]
+    public void TestRotateAngle360()
+    {
+        Mock<IRotatable> mock = new Mock<IRotatable>();
+        mock.SetupGet(x => x.Direction).Returns(350).Verifiable();
+        mock.SetupGet(x => x.AngularVelocity).Returns(390).Verifiable();
+        RotateCommand rotateCommand = new RotateCommand(mock.Object);
+
+        rotateCommand.Execute();
+
+        mock.VerifySet(x => x.Direction = 20, Times.Once);
+    }
 }
