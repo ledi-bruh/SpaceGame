@@ -3,13 +3,10 @@ namespace Vector;
 public class Vector
 {
     private readonly int[] _elements;
-    private int _size => _elements.Length;
-    public Vector(params int[] elements)
-    {
-        this._elements = elements;
-    }
+    public int Size => _elements.Length;
+    public Vector(params int[] elements) => this._elements = elements;
 
-    public static bool IsEqualSize(Vector A, Vector B) => A._size == B._size;
+    public static bool IsEqualSize(Vector A, Vector B) => A.Size == B.Size;
 
     public override bool Equals(object? obj)
     {
