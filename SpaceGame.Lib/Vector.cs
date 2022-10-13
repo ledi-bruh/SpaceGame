@@ -18,10 +18,7 @@ public class Vector
         unchecked
         {
             int hash = (int)2166136261;
-            foreach (int n in _elements)
-            {
-                hash = (hash * 16777619) ^ n.GetHashCode();
-            }
+            _elements.ToList().ForEach(n => hash = (hash * 16777619) ^ n.GetHashCode());
             return hash;
         }
     }
