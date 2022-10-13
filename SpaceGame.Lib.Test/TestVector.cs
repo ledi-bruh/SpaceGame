@@ -4,19 +4,11 @@ using Vector;
 public class TestVector
 {
     [Fact]
-    public void TestIsEqualSizeTrue()
+    public void TestNotEmptyVector()
     {
-        Vector A = new Vector(5, 1);
-        Vector B = new Vector(0, 0);
-        Assert.True(Vector.IsEqualSize(A, B));
-    }
-
-    [Fact]
-    public void TestIsEqualSizeFalse()
-    {
-        Vector A = new Vector(0);
-        Vector B = new Vector(0, 0);
-        Assert.False(Vector.IsEqualSize(A, B));
+        Vector A = new Vector();
+        
+        Assert.Equal(1, A.Size);
     }
 
     [Fact]

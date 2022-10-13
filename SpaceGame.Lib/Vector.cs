@@ -4,9 +4,8 @@ public class Vector
 {
     private readonly int[] _elements;
     public int Size => _elements.Length;
+    public Vector() => this._elements = new int[] {0};
     public Vector(params int[] elements) => this._elements = elements;
-
-    public static bool IsEqualSize(Vector A, Vector B) => A.Size == B.Size;
 
     public override bool Equals(object? obj)
     {
@@ -25,7 +24,7 @@ public class Vector
 
     public static Vector operator +(Vector A, Vector B)
     {
-        if (!IsEqualSize(A, B)) throw new System.ArgumentException("Dimensions do not match");
+        if (A.Size != B.Size) throw new System.ArgumentException("Dimensions do not match");
         return new Vector(A._elements.Zip(B._elements, (a, b) => a + b).ToArray());
     }
 }
