@@ -1,4 +1,4 @@
-name: dotnet coverage
+name: code coverage
 
 on:
   push:
