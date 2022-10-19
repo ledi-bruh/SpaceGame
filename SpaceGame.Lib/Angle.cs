@@ -26,10 +26,10 @@ public class Angle
         return a | b;
     }
 
-    public Angle Round()
+    public Angle Round(int k = 360)
     {
-        _numerator %= 360 * _denominator;
-        return this;
+        if (k == 0) throw new DivideByZeroException();
+        return new Angle(_numerator % (k * _denominator), _denominator);
     }
 
     public override string ToString() => Math.Round(1d * _numerator / _denominator, 5).ToString().Replace(",", ".")
@@ -48,4 +48,6 @@ public class Angle
         int gcd = Angle.GCD(numerator, denominator);
         return new Angle(numerator / gcd, denominator / gcd);
     }
+
+    public static Angle operator %(Angle A, int b) => A.Round(b);
 }
