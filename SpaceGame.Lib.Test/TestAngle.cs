@@ -13,8 +13,8 @@ public class TestAngle
     public void TestToString()
     {
         Angle A = new Angle(22, 7);
-        
-        Assert.Equal("3.14286 deg", A.ToString());
+
+        Assert.Equal("3.14286 deg (22 / 7)", A.ToString());
     }
 
     [Fact]

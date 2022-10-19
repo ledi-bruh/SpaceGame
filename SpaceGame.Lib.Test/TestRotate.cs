@@ -1,5 +1,6 @@
 namespace SpaceGame.Lib.Test;
 using Moq;
+using Angle;
 
 public class TestRotate
 {
@@ -9,13 +10,13 @@ public class TestRotate
     public void TestRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock.SetupGet(x => x.Direction).Returns(45).Verifiable();
-        mock.SetupGet(x => x.AngularVelocity).Returns(90).Verifiable();
+        mock.SetupGet(x => x.Direction).Returns(new Angle(45)).Verifiable();
+        mock.SetupGet(x => x.AngularVelocity).Returns(new Angle(90)).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
         rotateCommand.Execute();
 
-        mock.VerifySet(x => x.Direction = 135, Times.Once);
+        mock.VerifySet(x => x.Direction = new Angle(135), Times.Once);
     }
 
     //* Попытка сдвинуть корабль, у которого невозможно прочитать значение угла наклона к горизонту, приводит к ошибке.
@@ -45,7 +46,9 @@ public class TestRotate
     public void CantChangeDirectionInRotating()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock.SetupSet(x => x.Direction = It.IsAny<int>()).Throws(new Exception()).Verifiable();
+        mock.SetupGet(x => x.Direction).Returns(new Angle(0)).Verifiable();
+        mock.SetupGet(x => x.AngularVelocity).Returns(new Angle(0)).Verifiable();
+        mock.SetupSet(x => x.Direction = It.IsAny<Angle>()).Throws(new Exception()).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
         Assert.Throws<Exception>(() => rotateCommand.Execute());
@@ -55,12 +58,12 @@ public class TestRotate
     public void TestRotateAngle360()
     {
         Mock<IRotatable> mock = new Mock<IRotatable>();
-        mock.SetupGet(x => x.Direction).Returns(350).Verifiable();
-        mock.SetupGet(x => x.AngularVelocity).Returns(390).Verifiable();
+        mock.SetupGet(x => x.Direction).Returns(new Angle(350)).Verifiable();
+        mock.SetupGet(x => x.AngularVelocity).Returns(new Angle(390)).Verifiable();
         RotateCommand rotateCommand = new RotateCommand(mock.Object);
 
         rotateCommand.Execute();
 
-        mock.VerifySet(x => x.Direction = 20, Times.Once);
+        mock.VerifySet(x => x.Direction = new Angle(20), Times.Once);
     }
 }

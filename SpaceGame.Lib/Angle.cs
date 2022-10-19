@@ -26,7 +26,14 @@ public class Angle
         return a | b;
     }
 
-    public override string ToString() => Math.Round(1d * _numerator / _denominator, 5).ToString().Replace(",", ".") + " deg";
+    public Angle Round()
+    {
+        _numerator %= 360 * _denominator;
+        return this;
+    }
+
+    public override string ToString() => Math.Round(1d * _numerator / _denominator, 5).ToString().Replace(",", ".")
+                                        + $" deg ({_numerator} / {_denominator})";
 
     public override bool Equals(object? obj) => obj is Angle angle &&
                                                 this._numerator == angle._numerator &&
