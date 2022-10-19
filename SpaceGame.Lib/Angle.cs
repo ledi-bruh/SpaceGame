@@ -3,7 +3,7 @@ namespace Angle;
 public class Angle
 {
     private int _numerator, _denominator;
-    public Angle(int numerator, int denominator)
+    public Angle(int numerator, int denominator = 1)
     {
         if (denominator == 0) throw new ArgumentException("Zero denominator");
         if (denominator < 0)
@@ -18,15 +18,19 @@ public class Angle
         }
     }
 
-    private static int GCD(int a, int b)
+    public static int GCD(int a, int b)
     {
-        return 1;
+        if (b < 0) b *= -1;
+        if (a < 0) a *= -1;
+        while (a != 0 && b != 0) if (a >= b) a %= b; else b %= a;
+        return a | b;
     }
 
-    public override bool Equals(object? obj)
-    {
-        return obj is Angle angle && this._numerator == angle._numerator && this._denominator == angle._denominator;
-    }
+    public override string ToString() => $"{Math.Round(1d * _numerator / _denominator, 5)} deg";
+
+    public override bool Equals(object? obj) => obj is Angle angle &&
+                                                this._numerator == angle._numerator &&
+                                                this._denominator == angle._denominator;
 
     public override int GetHashCode() => HashCode.Combine(_numerator, _denominator);
 
@@ -34,7 +38,6 @@ public class Angle
     {
         int numerator = A._numerator * B._denominator + B._numerator * A._denominator;
         int denominator = A._denominator * B._denominator;
-        //! gcd
         int gcd = Angle.GCD(numerator, denominator);
         return new Angle(numerator / gcd, denominator / gcd);
     }
