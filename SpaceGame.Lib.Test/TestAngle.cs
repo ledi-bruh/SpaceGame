@@ -71,31 +71,13 @@ public class TestAngle
     };
 
     [Theory]
-    [InlineData(5, 125, 5)]
-    [InlineData(532634542, 2, 2)]
-    [InlineData(-7, 7000, 7)]
-    [InlineData(90, -9, 9)]
-    [InlineData(-110, -11, 11)]
-    public void TestGCD(int a, int b, int c)
-    {
-        Assert.Equal(c, Angle.GCD(a, b));
-    }
-
-    [Theory]
-    [MemberData(nameof(TestRoundData))]
-    public void TestRound(Angle A, int k, Angle B)
-    {
-        Assert.Equal(B, A.Round(k));
-    }
-
-    [Theory]
-    [MemberData(nameof(TestRoundData))]
+    [MemberData(nameof(TestModData))]
     public void TestMod(Angle A, int k, Angle B)
     {
         Assert.Equal(B, A % k);
     }
 
-    public static IEnumerable<object[]> TestRoundData => new List<object[]>
+    public static IEnumerable<object[]> TestModData => new List<object[]>
     {
         new object[] { new Angle(127, 3), 5, new Angle(7, 3) },
         new object[] { new Angle(-370), 360, new Angle(-10) },
@@ -106,7 +88,6 @@ public class TestAngle
     [Fact]
     public void TestRoundModZero()
     {
-        Assert.Throws<DivideByZeroException>(() => new Angle(124, 7).Round(0));
         Assert.Throws<DivideByZeroException>(() => new Angle(124, 7) % 0);
     }
 }

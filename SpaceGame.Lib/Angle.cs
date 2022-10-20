@@ -18,15 +18,15 @@ public class Angle
         }
     }
 
-    public static int GCD(int a, int b)
+    private static int GCD(int a, int b)
     {
-        if (b < 0) b *= -1;
-        if (a < 0) a *= -1;
+        b = Math.Abs(b);
+        a = Math.Abs(a);
         while (a != 0 && b != 0) if (a >= b) a %= b; else b %= a;
         return a | b;
     }
 
-    public Angle Round(int k = 360)
+    private Angle Round(int k = 360)
     {
         if (k == 0) throw new DivideByZeroException();
         return new Angle(_numerator % (k * _denominator), _denominator);
