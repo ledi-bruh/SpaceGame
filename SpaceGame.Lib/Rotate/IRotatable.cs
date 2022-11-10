@@ -8,6 +8,7 @@ public interface IRotatable
         get;
         set;
     }
+    
     public Angle AngularVelocity
     {
         get;

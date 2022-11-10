@@ -3,6 +3,7 @@ namespace Angle;
 public class Angle
 {
     private int _numerator, _denominator;
+    
     public Angle(int numerator, int denominator = 1)
     {
         if (denominator == 0) throw new ArgumentException("Zero denominator");
