@@ -14,7 +14,17 @@ public static class IoC
 
     public static T Resolve<T>(string key, params object[] args)
     {
-        return (T)_store["IoC.Resolve"].Invoke(key, args);
-        // try catch
+        try
+        {
+            return (T)_store["IoC.Resolve"].Invoke(key, args);
+        }
+        catch (ResolveDependencyException rde)
+        {
+            throw rde;
+        }
+        catch (Exception)
+        {
+            throw new ResolveDependencyException();
+        }
     }
 }
