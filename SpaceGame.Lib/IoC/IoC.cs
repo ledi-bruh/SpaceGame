@@ -7,14 +7,14 @@ public static class IoC
     static IoC()
     {
         _store = new Dictionary<string, IStrategy>();
+        _store["IoC.Resolve"] = new IoCResolveStrategy(_store);
         _store["IoC.Register"] = new IoCRegisterStrategy(_store);
-        //? "IoC.Resolve"
-        //? "IoC.Root"
+        _store["IoC.Root.Store"] = new IoCRootStoreStrategy(_store);
     }
 
     public static T Resolve<T>(string key, params object[] args)
     {
-        return (T)_store[key].Invoke(args);
+        return (T)_store["IoC.Resolve"].Invoke(key, args);
         // try catch
     }
 }
