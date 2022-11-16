@@ -22,9 +22,9 @@ public static class IoC
         {
             throw rde;
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            throw new ResolveDependencyException();
+            throw new ResolveDependencyException(e.Message);
         }
     }
 }
