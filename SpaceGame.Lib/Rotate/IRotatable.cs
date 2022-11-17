@@ -1,13 +1,15 @@
 namespace SpaceGame.Lib;
+using Angle;
 
 public interface IRotatable
 {
-    public int Direction  //! Vector Direction
+    public Angle Direction
     {
         get;
         set;
     }
-    public int AngularVelocity
+    
+    public Angle AngularVelocity
     {
         get;
     }
