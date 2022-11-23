@@ -1,6 +1,6 @@
 namespace SpaceGame.Lib;
 
-class ResolveDependencyException : Exception
+public class ResolveDependencyException : Exception
 {
-    public ResolveDependencyException(string message) : base(message) { }
+    public ResolveDependencyException(string message = "") : base(message) { }
 }
