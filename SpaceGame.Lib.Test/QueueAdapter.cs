@@ -1,4 +1,4 @@
-namespace SpaceGame.Lib;
+namespace SpaceGame.Lib.Test;
 
 public class QueueAdapter<T> : IQueue<T>
 {
