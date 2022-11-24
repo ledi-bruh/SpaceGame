@@ -19,6 +19,6 @@ public class StartMovementCommand : ICommand
 
         ICommand command = IoC.Resolve<ICommand>("Game.Operation.Movement", _startable.Target);
 
-        IoC.Resolve<IQueue<ICommand>>("Game.Queue").Push(command);
+        IoC.Resolve<Queue<ICommand>>("Game.Queue").Enqueue(command);
     }
 }

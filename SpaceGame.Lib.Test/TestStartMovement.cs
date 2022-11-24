@@ -24,7 +24,7 @@ public class TestStartMovement
         IoC.Resolve<ICommand>("IoC.Register", "Game.UObject.SetProperty", mockStrategyWithParams.Object).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Operation.Movement", mockStrategyWithParams.Object).Execute();
 
-        var mockQueue = new Mock<IQueue<ICommand>>();
+        var mockQueue = new Mock<Queue<ICommand>>();
         var mockQueueStrategy = new Mock<IStrategy>();
         mockQueueStrategy.Setup(x => x.Invoke()).Returns(mockQueue.Object);
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue", mockQueueStrategy.Object).Execute();
