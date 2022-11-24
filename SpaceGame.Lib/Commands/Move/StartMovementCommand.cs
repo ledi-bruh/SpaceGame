@@ -8,12 +8,12 @@ public class StartMovementCommand : ICommand
 
     public void Execute()
     {
-        _startable.Parameters.ToList().ForEach(param =>
+        _startable.Parameters.ToList().ForEach(parameter =>
             IoC.Resolve<ICommand>(
                 "Game.UObject.SetProperty",
                 _startable.Target,
-                param.Key,
-                param.Value
+                parameter.Key,
+                parameter.Value
             ).Execute()
         );
 
