@@ -1,5 +1,5 @@
 namespace SpaceGame.Lib;
-class EndMovementCommand : ICommand
+public class EndMovementCommand : ICommand
 {
     private IEndable _endable;
 
