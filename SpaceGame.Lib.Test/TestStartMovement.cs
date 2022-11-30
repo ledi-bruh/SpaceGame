@@ -12,23 +12,22 @@ public class TestStartMovement
         var mockStrategyWithParams = new Mock<IStrategy>();
         mockStrategyWithParams.Setup(x => x.Invoke(It.IsAny<object[]>())).Returns(mockCommand.Object);
 
-        var mockStrategyWithoutParams = new Mock<IStrategy>();
-        mockStrategyWithoutParams.Setup(x => x.Invoke()).Returns(new Queue<ICommand>());
+        var mockQueueStrategy = new Mock<IStrategy>();
+        mockQueueStrategy.Setup(x => x.Invoke()).Returns(new Queue<ICommand>());
 
         IoC.Resolve<ICommand>("IoC.Register", "Game.UObject.SetProperty", mockStrategyWithParams.Object).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Operation.Movement", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Queue", mockStrategyWithoutParams.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Queue", mockQueueStrategy.Object).Execute();
     }
 
-    //* Успешное выполнение StartMovementCommand
     [Fact]
-    public void StartMovementCommand()
+    public void SuccesfullStartMovementCommand()
     {
         var mockUObject = new Mock<IUObject>();
 
         var mockStartable = new Mock<IStartable>();
-        mockStartable.Setup(x => x.Target).Returns(mockUObject.Object).Verifiable();
-        mockStartable.Setup(x => x.Parameters).Returns(
+        mockStartable.SetupGet(x => x.Target).Returns(mockUObject.Object).Verifiable();
+        mockStartable.SetupGet(x => x.Parameters).Returns(
             new Dictionary<string, object> { { "Velocity", new Vector(1, 1) } }
         ).Verifiable();
 
@@ -38,15 +37,14 @@ public class TestStartMovement
         mockStartable.VerifyAll();
     }
 
-    //* Попытка получить Target выбросит ошибку
     [Fact]
     public void TryGetTargetThrowsException()
     {
         var mockUObject = new Mock<IUObject>();
 
         var mockStartable = new Mock<IStartable>();
-        mockStartable.Setup(x => x.Target).Throws(new Exception()).Verifiable();
-        mockStartable.Setup(x => x.Parameters).Returns(
+        mockStartable.SetupGet(x => x.Target).Throws(new Exception()).Verifiable();
+        mockStartable.SetupGet(x => x.Parameters).Returns(
             new Dictionary<string, object> { { "Velocity", new Vector(1, 1) } }
         ).Verifiable();
 
@@ -56,15 +54,14 @@ public class TestStartMovement
         mockStartable.VerifyAll();
     }
 
-    //* Попытка получить Parameters выбросит ошибку
     [Fact]
     public void TryGetParametersThrowsException()
     {
         var mockUObject = new Mock<IUObject>();
 
         var mockStartable = new Mock<IStartable>();
-        mockStartable.Setup(x => x.Target).Returns(mockUObject.Object);
-        mockStartable.Setup(x => x.Parameters).Throws(new Exception());
+        mockStartable.SetupGet(x => x.Target).Returns(mockUObject.Object);
+        mockStartable.SetupGet(x => x.Parameters).Throws(new Exception());
 
         var startMovementCommand = new StartMovementCommand(mockStartable.Object);
 
