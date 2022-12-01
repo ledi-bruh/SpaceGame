@@ -17,8 +17,10 @@ public class StartMovementCommand : ICommand
             ).Execute()
         );
 
-        ICommand command = IoC.Resolve<ICommand>("Game.Operation.Movement", _startable.Target);
+        ICommand injectCommand = IoC.Resolve<ICommand>("Game.Operation.Movement", _startable.Target);
 
-        IoC.Resolve<Queue<ICommand>>("Game.Queue").Enqueue(command);
+        IoC.Resolve<ICommand>("Game.UObject.SetProperty", _startable.Target, "Movement", injectCommand).Execute();
+
+        IoC.Resolve<Queue<ICommand>>("Game.Queue").Enqueue(injectCommand);
     }
 }
