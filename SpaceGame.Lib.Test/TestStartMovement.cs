@@ -40,8 +40,6 @@ public class TestStartMovement
     [Fact]
     public void TryGetTargetThrowsException()
     {
-        var mockUObject = new Mock<IUObject>();
-
         var mockStartable = new Mock<IStartable>();
         mockStartable.SetupGet(x => x.Target).Throws(new Exception()).Verifiable();
         mockStartable.SetupGet(x => x.Parameters).Returns(
