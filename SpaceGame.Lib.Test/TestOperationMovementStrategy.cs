@@ -1,24 +1,25 @@
 namespace SpaceGame.Lib.Test;
 using Moq;
+using Hwdtech;
+using Hwdtech.Ioc;
 
 public class TestOperaionMovementStrategy
 {
     public TestOperaionMovementStrategy()
     {
-        var mockCommand = new Mock<ICommand>();
+        new InitScopeBasedIoCImplementationCommand().Execute();
+
+        var mockCommand = new Mock<SpaceGame.Lib.ICommand>();
         mockCommand.Setup(x => x.Execute());
 
-        var mockStrategyWithParams = new Mock<IStrategy>();
-        mockStrategyWithParams.Setup(x => x.Invoke(It.IsAny<object[]>())).Returns(mockCommand.Object);
+        var mockConfigCommandsStrategy = new Mock<IStrategy>();
+        mockConfigCommandsStrategy.Setup(x => x.Invoke()).Returns(new List<string>() {"Game.Command.Move"});
 
-        var mockConfigPropertiesStrategy = new Mock<IStrategy>();
-        mockConfigPropertiesStrategy.Setup(x => x.Invoke()).Returns(new List<string>() {"Game.Command.Move"});
-
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Move", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Macro", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Inject", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Repeat", mockStrategyWithParams.Object).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Config.Commands", mockConfigPropertiesStrategy.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Move", (object[] args) => mockCommand.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Macro", (object[] args) => mockCommand.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Inject", (object[] args) => mockCommand.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Repeat", (object[] args) => mockCommand.Object).Execute();        
+        IoC.Resolve<ICommand>("IoC.Register", "Config.Commands", (object[] args) => mockConfigCommandsStrategy.Object.Invoke(args)).Execute();
     }
 
     [Fact]
