@@ -1,12 +1,11 @@
 namespace SpaceGame.Lib;
+using Hwdtech;
+
 public class EndMovementCommand : ICommand
 {
     private IEndable _endable;
 
-    public EndMovementCommand(IEndable endable)
-    {
-        _endable = endable;
-    }
+    public EndMovementCommand(IEndable endable) => _endable = endable;
 
     public void Execute()
     {
