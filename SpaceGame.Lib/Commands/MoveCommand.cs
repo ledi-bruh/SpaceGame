@@ -3,9 +3,8 @@ namespace SpaceGame.Lib;
 public class MoveCommand : ICommand
 {
     private readonly IMovable _movable;
-    public MoveCommand(IMovable obj)
-    {
-        this._movable = obj;
-    }
-    public void Execute() => this._movable.Position += this._movable.Velocity;
+
+    public MoveCommand(IMovable movable) => _movable = movable;
+
+    public void Execute() => _movable.Position += _movable.Velocity;
 }

@@ -2,11 +2,11 @@ namespace SpaceGame.Lib;
 
 public class InjectCommand : ICommand, IInjectable
 {
-    ICommand _cmd;
+    private ICommand _command;
 
-    public InjectCommand(ICommand cmd) => _cmd = cmd;
+    public InjectCommand(ICommand command) => _command = command;
 
-    public void Execute() => _cmd.Execute();
+    public void Execute() => _command.Execute();
 
-    public void Inject(object obj) => _cmd = (ICommand)obj; 
+    public void Inject(object command) => _command = (ICommand)command;
 }
