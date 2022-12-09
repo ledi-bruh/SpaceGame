@@ -3,7 +3,9 @@ namespace Vector;
 public class Vector
 {
     private readonly int[] _elements;
+    
     public int Size => _elements.Length;
+
     public Vector(params int[] elements)
     {
         if (elements.Length == 0) throw new ArgumentException("Invalid params");
