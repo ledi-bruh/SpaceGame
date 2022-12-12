@@ -4,8 +4,7 @@ public class RotateCommand : ICommand
 {
     private readonly IRotatable _rotatable;
 
-    public RotateCommand(IRotatable obj) => _rotatable = obj;
+    public RotateCommand(IRotatable rotatable) => _rotatable = rotatable;
 
-    public void Execute() => this._rotatable.Direction = (this._rotatable.Direction + this._rotatable.AngularVelocity) % 360;
-    //! Direction = (int)Round(Direction * Матрица поворота от AngleVelocity * Math.PI/180)
+    public void Execute() => _rotatable.Direction = (_rotatable.Direction + _rotatable.AngularVelocity) % 360;
 }
