@@ -52,5 +52,6 @@ public class TestCollisionTreeBuilder
 
         Assert.Equal(3, IoC.Resolve<IDictionary<int, object>>("Game.CollisionTree").Count);
         Assert.Equal(2, ((IDictionary<int, object>)IoC.Resolve<IDictionary<int, object>>("Game.CollisionTree")[1]).Count);
+        Assert.Equal(2, ((IDictionary<int, object>)((IDictionary<int, object>)((IDictionary<int, object>)IoC.Resolve<IDictionary<int, object>>("Game.CollisionTree")[1])[6])[2]).Count);
     }
 }
