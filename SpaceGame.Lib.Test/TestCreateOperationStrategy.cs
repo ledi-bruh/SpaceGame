@@ -39,7 +39,7 @@ public class TestCreateOperationStrategy
             "IoC.Register",
             "Game.Command.Repeat",
             (object[] args) => new RepeatCommand((SpaceGame.Lib.ICommand)args[0])
-            ).Execute();
+        ).Execute();
 
         IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Operation.Create", operationName, mockUObject.Object).Execute();
         mockCommand.VerifyAll();
@@ -58,7 +58,7 @@ public class TestCreateOperationStrategy
             "IoC.Register",
             "Game.Queue",
             (object[] args) => queue
-            ).Execute();
+        ).Execute();
 
         repeatCommand.Execute();
 
