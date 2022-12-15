@@ -12,11 +12,6 @@ public class TestCreateOperationStrategy
         IoC.Resolve<ICommand>("Scopes.Current.Set",
             IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))
         ).Execute();
-        IoC.Resolve<ICommand>(
-            "IoC.Register",
-            "Game.Operation.Create",
-            (object[] args) => new CreateOperationStrategy().Invoke(args)
-        ).Execute();
     }
 
     [Fact]
@@ -28,7 +23,7 @@ public class TestCreateOperationStrategy
         string operationName = "Movement";
         var mockUObject = new Mock<IUObject>();
 
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Macro.Create", (object[] args) => mockCommand.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Command." + operationName, (object[] args) => mockCommand.Object).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Macro", (object[] args) => mockCommand.Object).Execute();
         IoC.Resolve<ICommand>(
             "IoC.Register",
@@ -41,7 +36,13 @@ public class TestCreateOperationStrategy
             (object[] args) => new RepeatCommand((SpaceGame.Lib.ICommand)args[0])
         ).Execute();
 
-        IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Operation.Create", operationName, mockUObject.Object).Execute();
+        IoC.Resolve<ICommand>(
+            "IoC.Register",
+            "Game.Operation." + operationName,
+            (object[] args) => new CreateOperationStrategy(operationName).Invoke(args)
+        ).Execute();
+
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Operation." + operationName, mockUObject.Object).Execute();
         mockCommand.VerifyAll();
     }
 
