@@ -3,11 +3,10 @@ using Hwdtech;
 
 public class RegisterHandlerCommand : ICommand
 {
-    private ICommand _command;
-    private Exception _exception;
+    private object _command, _exception;
     private IHandler _handler;
 
-    public RegisterHandlerCommand(ICommand command, Exception exception, IHandler handler)
+    public RegisterHandlerCommand(object command, object exception, IHandler handler)
     {
         _command = command;
         _exception = exception;
@@ -16,6 +15,8 @@ public class RegisterHandlerCommand : ICommand
 
     public void Execute()
     {
-        IoC.Resolve<IDictionary<ICommand, IDictionary<Exception, IHandler>>>("Game.HandlerTree")[_command].Add(_exception, _handler);
+        var tree = IoC.Resolve<IDictionary<object, IDictionary<object, IHandler>>>("Exception.Handle.Tree");
+        tree.TryAdd(_command, new Dictionary<object, IHandler>());
+        tree[_command].Add(_exception, _handler);
     }
 }
