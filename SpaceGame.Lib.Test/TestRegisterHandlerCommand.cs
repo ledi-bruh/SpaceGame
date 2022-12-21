@@ -3,9 +3,14 @@ using Moq;
 using Hwdtech;
 using Hwdtech.Ioc;
 
-public class TestRegisterCommand
+internal class CommandTest : ICommand
 {
-    public TestRegisterCommand()
+    public void Execute() { }
+}
+
+public class TestRegisterHandlerCommand
+{
+    public TestRegisterHandlerCommand()
     {
         new InitScopeBasedIoCImplementationCommand().Execute();
 
@@ -15,47 +20,48 @@ public class TestRegisterCommand
     }
 
     [Fact]
-    public void SuccesfullRegisterCommand()
+    public void SuccesfullRegisterHandlerCommand()
     {
-        // // var mockCommand = new Mock<ICommand>();
-        // // var mockException = new Mock<Exception>();
-        // // var mockHandler = new Mock<IHandler>();
+        var mockHandler = new Mock<IHandler>();
 
-        // var mockEDict = new Mock<IDictionary<Exception, IHandler>>();
-        // mockEDict.Setup(x => x.Add(It.IsAny<Exception>(), It.IsAny<IHandler>())).Verifiable();
+        var mockExceptionLevelDict = new Mock<IDictionary<object, IHandler>>();
+        mockExceptionLevelDict.Setup(x => x.Add(typeof(ArgumentException), It.IsAny<IHandler>())).Verifiable();
 
-        // var mockCDict = new Mock<IDictionary<SpaceGame.Lib.ICommand, IDictionary<Exception, IHandler>>>();
-        // mockCDict.Setup(x => x.Add(It.IsAny<SpaceGame.Lib.ICommand>(), It.IsAny<IDictionary<Exception, IHandler>>())).Verifiable();
-        // mockCDict.Setup(x => x[It.IsAny<SpaceGame.Lib.ICommand>()]).Returns(mockEDict.Object).Verifiable();
+        var mockCommandLevelDict = new Mock<IDictionary<object, IDictionary<object, IHandler>>>();
+        mockCommandLevelDict.Setup(x => x.Add(typeof(CommandTest), It.IsAny<IDictionary<object, IHandler>>())).Verifiable();
+        mockCommandLevelDict.Setup(x => x[typeof(CommandTest)]).Returns(mockExceptionLevelDict.Object).Verifiable();
 
-        // IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Register",
-        //     (object[] args) => new RegisterHandlerCommand((SpaceGame.Lib.ICommand)args[0], (Exception)args[1], (IHandler)args[2])
-        // ).Execute();
-        // IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Tree", mockCDict.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Register",
+            (object[] args) => new RegisterHandlerCommand(args[0], args[1], (IHandler)args[2])
+        ).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Tree", (object[] args) => mockCommandLevelDict.Object).Execute();
 
-        // mockEDict.VerifyAll();
-        // mockCDict.VerifyAll();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(CommandTest), typeof(ArgumentException), mockHandler.Object).Execute();
+        
+        mockExceptionLevelDict.VerifyAll();
+        mockCommandLevelDict.VerifyAll();
     }
 
     [Fact]
-    public void T123()
+    public void SuccesfullRegisterSomeExceptionHandlers()
     {
-        var a = new Dictionary<object, IDictionary<object, IHandler>>();
         var mockHandler = new Mock<IHandler>();
+        var dict = new Dictionary<object, IDictionary<object, IHandler>>();
 
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Register",
-            (object[] args) => new RegisterHandlerCommand((object)args[0], (object)args[1], (IHandler)args[2])
+            (object[] args) => new RegisterHandlerCommand(args[0], args[1], (IHandler)args[2])
         ).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Tree", (object[] args) => a).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handle.Tree", (object[] args) => dict).Execute();
 
-        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(MoveCommand), typeof(ArgumentNullException), mockHandler.Object).Execute();
-        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", "Exception.Handle.Command.Default", typeof(ArgumentNullException), mockHandler.Object).Execute();
-        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(MoveCommand), "Exception.Handle.Exception.Default", mockHandler.Object).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(CommandTest), typeof(ArgumentException), mockHandler.Object).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(CommandTest), typeof(ArithmeticException), mockHandler.Object).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", typeof(CommandTest), "Exception.Handle.Exception.Default", mockHandler.Object).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", "Exception.Handle.Command.Default", typeof(ArgumentException), mockHandler.Object).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Exception.Handle.Register", "Exception.Handle.Command.Default", typeof(FormatException), mockHandler.Object).Execute();
+        var tree = IoC.Resolve<IDictionary<object, IDictionary<object, IHandler>>>("Exception.Handle.Tree");
 
-        var imovable = new Mock<IMovable>();
-
-        object b = new MoveCommand(imovable.Object).GetType();
-        var c = a[b];
-
+        Assert.Equal(2, tree.Count());
+        Assert.Equal(3, tree[typeof(CommandTest)].Count());
+        Assert.Equal(2, tree["Exception.Handle.Command.Default"].Count());
     }
 }
