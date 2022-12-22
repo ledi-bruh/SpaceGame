@@ -14,9 +14,15 @@ public class RegisterHandlerCommand : ICommand
 
     public void Execute()
     {
-        IoC.Resolve<IDictionary<int, IHandler>>("Exception.Handler.Tree").Add(
-            String.Join("_", _types.Select(x => x.GetHashCode()).OrderBy(x => x)).GetHashCode(),
-            _handler
-        );
+        unchecked
+        {
+            int hash = (int)2166136261;
+
+            _types.Select(x => x.GetHashCode()).OrderBy(x => x).ToList().ForEach(
+                hashcode => hash = (hash * 16777619) ^ hashcode
+            );
+
+            IoC.Resolve<IDictionary<int, IHandler>>("Exception.Handler.Tree").Add(hash, _handler);
+        }
     }
 }
