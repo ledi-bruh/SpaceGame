@@ -19,6 +19,7 @@ public class TestRegisterHandlerCommand
         ).Execute();
 
         IoC.Resolve<ICommand>("IoC.Register", "GetHashCode", (object[] args) => new GetHashCodeStrategy().Invoke(args)).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "GetHashCode.AnyOrder", (object[] args) => new GetHashCodeInAnyOrderStrategy().Invoke(args)).Execute();
     }
 
     [Fact]

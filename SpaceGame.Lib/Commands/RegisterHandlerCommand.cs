@@ -15,7 +15,7 @@ public class RegisterHandlerCommand : ICommand
     public void Execute()
     {
         IoC.Resolve<IDictionary<int, IHandler>>("Exception.Handler.Tree").Add(
-            IoC.Resolve<int>("GetHashCode", _types.OrderBy(x => x.GetHashCode())),
+            IoC.Resolve<int>("GetHashCode.AnyOrder", _types),
             _handler
         );
     }
