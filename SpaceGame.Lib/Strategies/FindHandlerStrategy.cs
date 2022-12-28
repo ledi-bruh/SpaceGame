@@ -9,7 +9,7 @@ public class FindHanlderStrategy : IStrategy  // "Exception.Handler.Find"
 
         var tree = IoC.Resolve<IDictionary<int, IHandler>>("Exception.Handler.Tree");
 
-        if (tree.TryGetValue(IoC.Resolve<int>("GetHashCode", types.OrderBy(x => x.GetHashCode())), out IHandler? handler))
+        if (tree.TryGetValue(IoC.Resolve<int>("GetHashCode.AnyOrder", types), out IHandler? handler))
         {
             return handler;
         }

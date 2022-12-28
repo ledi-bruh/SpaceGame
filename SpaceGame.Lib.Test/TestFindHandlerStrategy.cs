@@ -21,6 +21,9 @@ public class TestFindHandlerStrategy
         var mockHandler = new Mock<IHandler>();
 
         IoC.Resolve<ICommand>("IoC.Register", "GetHashCode", (object[] args) => new GetHashCodeStrategy().Invoke(args)).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "GetHashCode.AnyOrder", 
+            (object[] args) => new GetHashCodeInAnyOrderStrategy().Invoke(args)
+        ).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Tree", (object[] args) => tree).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find",
             (object[] args) => new FindHanlderStrategy().Invoke(args)
@@ -28,7 +31,7 @@ public class TestFindHandlerStrategy
 
         var types = new List<Type>() { typeof(ICommand), typeof(ArgumentException) };
 
-        tree.Add(IoC.Resolve<int>("GetHashCode", types.OrderBy(x => x.GetHashCode())), mockHandler.Object);
+        tree.Add(IoC.Resolve<int>("GetHashCode.AnyOrder", types), mockHandler.Object);
 
         Assert.Equal(mockHandler.Object, IoC.Resolve<IHandler>("Exception.Handler.Find", types));
     }
@@ -42,6 +45,9 @@ public class TestFindHandlerStrategy
         tree.Add(0, mockHandler.Object);
 
         IoC.Resolve<ICommand>("IoC.Register", "GetHashCode", (object[] args) => new GetHashCodeStrategy().Invoke(args)).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "GetHashCode.AnyOrder", 
+            (object[] args) => new GetHashCodeInAnyOrderStrategy().Invoke(args)
+        ).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Tree", (object[] args) => tree).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", 
             (object[] args) => new FindHanlderStrategy().Invoke(args)
