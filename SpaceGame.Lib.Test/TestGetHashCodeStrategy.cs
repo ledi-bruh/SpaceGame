@@ -5,10 +5,10 @@ public class TestGetHashCodeStrategy
     [Fact]
     public void SuccesfullGetHashCode()
     {
-        IEnumerable<object> data = new object[] { 1 };
+        var data = new List<object> { typeof(Exception) };
         int hash;
 
-        unchecked { hash = ((int)2166136261 * 16777619) ^ 1.GetHashCode(); }
+        unchecked { hash = ((int)2166136261 * 16777619) ^ data[0].GetHashCode(); }
 
         Assert.Equal(hash, new GetHashCodeStrategy().Invoke(data));
     }
@@ -16,20 +16,20 @@ public class TestGetHashCodeStrategy
     [Fact]
     public void GetHashCodeSomeDataInSameOrderAreEqual()
     {
-        GetHashCodeStrategy ghc = new GetHashCodeStrategy();
-        IEnumerable<object> data1 = new object[] { 1, "f2", typeof(Exception) };
-        IEnumerable<object> data2 = new object[] { 1, "f2", typeof(Exception) };
+        var ghc = new GetHashCodeStrategy();
+        var data1 = new List<object> { 1, "f2", typeof(Exception) };
+        var data2 = new List<object> { 1, "f2", typeof(Exception) };
 
-        Assert.Equal(new GetHashCodeStrategy().Invoke(data1), new GetHashCodeStrategy().Invoke(data2));
+        Assert.Equal(ghc.Invoke(data1), ghc.Invoke(data2));
     }
 
     [Fact]
     public void GetHashCodeSomeDataInDifferentOrderAreNotEqual()
     {
-        GetHashCodeStrategy ghc = new GetHashCodeStrategy();
-        IEnumerable<object> data1 = new object[] { 1, 0 };
-        IEnumerable<object> data2 = new object[] { 0, 1 };
+        var ghc = new GetHashCodeStrategy();
+        var data1 = new List<object> { 1, 0 };
+        var data2 = new List<object> { 0, 1 };
 
-        Assert.NotEqual(new GetHashCodeStrategy().Invoke(data1), new GetHashCodeStrategy().Invoke(data2));
+        Assert.NotEqual(ghc.Invoke(data1), ghc.Invoke(data2));
     }
 }

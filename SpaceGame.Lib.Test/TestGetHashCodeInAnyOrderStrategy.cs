@@ -18,10 +18,9 @@ public class TestGetHashCodeInAnyOrderStrategy
     [Fact]
     public void GetHashCodeSomeDataInAnyOrderAreEqual()
     {
-        IEnumerable<object> data1 = new object[] { -5123, typeof(Exception), "ooaip" };
-        IEnumerable<object> data2 = new object[] { typeof(Exception), "ooaip", -5123 };
-
-        GetHashCodeInAnyOrderStrategy ghcAnyOrder = new GetHashCodeInAnyOrderStrategy();
+        var ghcAnyOrder = new GetHashCodeInAnyOrderStrategy();
+        var data1 = new List<object> { -5123, typeof(Exception), "ooaip" };
+        var data2 = new List<object> { typeof(Exception), "ooaip", -5123 };
 
         Assert.Equal(ghcAnyOrder.Invoke(data1), ghcAnyOrder.Invoke(data2));
     }
