@@ -6,8 +6,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        int threadCount = int.Parse(args[0]);
+
         Console.WriteLine("Starting server...");
-        IoC.Resolve<ICommand>("Server.Start", args[0]).Execute();
+        IoC.Resolve<ICommand>("Server.Start", threadCount).Execute();
         Console.WriteLine("Server started successfully");
 
         Console.ReadKey();
