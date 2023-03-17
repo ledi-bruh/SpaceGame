@@ -1,11 +1,11 @@
 namespace SpaceGame.Lib;
 
-public class LogHandler : IHandler
+public class LogFileHandler : IHandler
 {
     private string _log_file_path;
     private IEnumerable<Type> _types;
 
-    public LogHandler(string log_file_path, IEnumerable<Type> types)
+    public LogFileHandler(string log_file_path, IEnumerable<Type> types)
     {
         _log_file_path = log_file_path;
         _types = types;
