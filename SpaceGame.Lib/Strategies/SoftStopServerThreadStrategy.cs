@@ -3,7 +3,7 @@ using Hwdtech;
 using System.Collections.Concurrent;
 
 
-public class SoftStopServerStrategy : IStrategy //Server.Stop.Soft
+public class SoftStopServerThreadStrategy : IStrategy //Server.Thread.Stop.Soft
 {
     public object Invoke(params object[] args)
     {
@@ -17,7 +17,7 @@ public class SoftStopServerStrategy : IStrategy //Server.Stop.Soft
         ServerThread? thread;
         if (IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map").TryGetValue(id, out thread))
         {
-            var cmd = new SoftStopServerCommand(thread, action);
+            var cmd = new SoftStopServerThreadCommand(thread, action);
             return new SendCommand(id, new ActionCommand(() =>
             {
                 cmd.Execute();

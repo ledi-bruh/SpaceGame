@@ -3,7 +3,7 @@ using Hwdtech;
 using System.Collections.Concurrent;
 
 
-public class HardStopServerStrategy : IStrategy //Server.Stop.Hard
+public class HardStopServerThreadStrategy : IStrategy //Server.Thread.Stop.Hard
 {
     public object Invoke(params object[] args)
     {
@@ -17,7 +17,7 @@ public class HardStopServerStrategy : IStrategy //Server.Stop.Hard
         ServerThread? thread;
         if (IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map").TryGetValue(id, out thread))
         {
-            var cmd = new HardStopServerCommand(thread);
+            var cmd = new HardStopServerThreadCommand(thread);
             return new SendCommand(id, new ActionCommand(() =>
             {
                 cmd.Execute();

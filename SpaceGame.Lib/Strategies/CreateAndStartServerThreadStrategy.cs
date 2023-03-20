@@ -2,7 +2,7 @@ namespace SpaceGame.Lib;
 using System.Collections.Concurrent;
 using Hwdtech;
 
-public class CreateAndStartServerStrategy : IStrategy  //"Server.Thread.Create.Start"
+public class CreateAndStartServerThreadStrategy : IStrategy  //"Server.Thread.Create.Start"
 {
     public object Invoke(params object[] args)
     {

@@ -2,11 +2,11 @@ namespace SpaceGame.Lib;
 using Hwdtech;
 
 
-public class HardStopServerCommand : ICommand
+public class HardStopServerThreadCommand : ICommand
 {
     ServerThread _thread;
 
-    public HardStopServerCommand(ServerThread thread) => _thread = thread;
+    public HardStopServerThreadCommand(ServerThread thread) => _thread = thread;
 
     public void Execute()
     {

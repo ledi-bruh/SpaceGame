@@ -288,9 +288,9 @@ BRH:0
 FNF:2
 FNH:2
 end_of_record
-SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\HardStopServerCommand.cs
-FN:11,System.Void SpaceGame.Lib.HardStopServerCommand::Execute()
-FNDA:6,System.Void SpaceGame.Lib.HardStopServerCommand::Execute()
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\HardStopServerThreadCommand.cs
+FN:11,System.Void SpaceGame.Lib.HardStopServerThreadCommand::Execute()
+FNDA:6,System.Void SpaceGame.Lib.HardStopServerThreadCommand::Execute()
 DA:12,6
 DA:13,6
 DA:14,5
@@ -301,8 +301,8 @@ DA:19,1
 DA:21,5
 BRDA:13,14,0,5
 BRDA:13,14,1,1
-FN:8,System.Void SpaceGame.Lib.HardStopServerCommand::.ctor(SpaceGame.Lib.ServerThread)
-FNDA:12,System.Void SpaceGame.Lib.HardStopServerCommand::.ctor(SpaceGame.Lib.ServerThread)
+FN:8,System.Void SpaceGame.Lib.HardStopServerThreadCommand::.ctor(SpaceGame.Lib.ServerThread)
+FNDA:12,System.Void SpaceGame.Lib.HardStopServerThreadCommand::.ctor(SpaceGame.Lib.ServerThread)
 DA:9,12
 LF:9
 LH:9
@@ -436,9 +436,9 @@ BRH:2
 FNF:2
 FNH:2
 end_of_record
-SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\SoftStopServerCommand.cs
-FN:15,System.Void SpaceGame.Lib.SoftStopServerCommand::Execute()
-FNDA:4,System.Void SpaceGame.Lib.SoftStopServerCommand::Execute()
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\SoftStopServerThreadCommand.cs
+FN:15,System.Void SpaceGame.Lib.SoftStopServerThreadCommand::Execute()
+FNDA:4,System.Void SpaceGame.Lib.SoftStopServerThreadCommand::Execute()
 DA:16,4
 DA:17,4
 DA:18,3
@@ -460,8 +460,8 @@ DA:34,1
 DA:36,3
 BRDA:17,14,0,3
 BRDA:17,14,1,1
-FN:9,System.Void SpaceGame.Lib.SoftStopServerCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
-FNDA:4,System.Void SpaceGame.Lib.SoftStopServerCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
+FN:9,System.Void SpaceGame.Lib.SoftStopServerThreadCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
+FNDA:4,System.Void SpaceGame.Lib.SoftStopServerThreadCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
 DA:10,4
 DA:11,4
 DA:12,4
@@ -559,9 +559,9 @@ BRH:2
 FNF:9
 FNH:9
 end_of_record
-SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\CreateAndStrategyServerStrategy.cs
-FN:7,System.Object SpaceGame.Lib.CreateAndStartServerStrategy::Invoke(System.Object[])
-FNDA:8,System.Object SpaceGame.Lib.CreateAndStartServerStrategy::Invoke(System.Object[])
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\CreateAndStartServerThreadStrategy.cs
+FN:7,System.Object SpaceGame.Lib.CreateAndStartServerThreadStrategy::Invoke(System.Object[])
+FNDA:8,System.Object SpaceGame.Lib.CreateAndStartServerThreadStrategy::Invoke(System.Object[])
 DA:8,8
 DA:10,12
 DA:11,8
@@ -684,8 +684,8 @@ FNF:1
 FNH:1
 end_of_record
 SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\HardStopServerStrategy.cs
-FN:8,System.Object SpaceGame.Lib.HardStopServerStrategy::Invoke(System.Object[])
-FNDA:6,System.Object SpaceGame.Lib.HardStopServerStrategy::Invoke(System.Object[])
+FN:8,System.Object SpaceGame.Lib.HardStopServerThreadStrategy::Invoke(System.Object[])
+FNDA:6,System.Object SpaceGame.Lib.HardStopServerThreadStrategy::Invoke(System.Object[])
 DA:9,6
 DA:10,8
 DA:11,6
@@ -789,9 +789,9 @@ BRH:0
 FNF:1
 FNH:1
 end_of_record
-SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\SoftStopServerStrategy.cs
-FN:8,System.Object SpaceGame.Lib.SoftStopServerStrategy::Invoke(System.Object[])
-FNDA:4,System.Object SpaceGame.Lib.SoftStopServerStrategy::Invoke(System.Object[])
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\SoftStopServerThreadStrategy.cs
+FN:8,System.Object SpaceGame.Lib.SoftStopServerThreadStrategy::Invoke(System.Object[])
+FNDA:4,System.Object SpaceGame.Lib.SoftStopServerThreadStrategy::Invoke(System.Object[])
 DA:9,4
 DA:10,4
 DA:11,4

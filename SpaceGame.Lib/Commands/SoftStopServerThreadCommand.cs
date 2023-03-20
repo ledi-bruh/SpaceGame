@@ -2,12 +2,12 @@ namespace SpaceGame.Lib;
 using Hwdtech;
 
 
-public class SoftStopServerCommand : ICommand
+public class SoftStopServerThreadCommand : ICommand
 {
     ServerThread _thread;
     Action _action;
 
-    public SoftStopServerCommand(ServerThread thread, Action action)
+    public SoftStopServerThreadCommand(ServerThread thread, Action action)
     {
         _thread = thread;
         _action = action;
