@@ -1,4 +1,6 @@
 namespace SpaceGame.Lib;
+using Hwdtech;
+
 
 public class ServerThread
 {
@@ -12,8 +14,14 @@ public class ServerThread
     internal void HandleCommand()
     {
         var cmd = queue.Receive();
-
-        cmd.Execute();
+        try
+        {
+            cmd.Execute();
+        }
+        catch (Exception e)
+        {
+            IoC.Resolve<IHandler>("Exception.Handler.Find", new List<Type>{cmd.GetType(), e.GetType()}).Handle();
+        }
     }
 
     public ServerThread(IReceiver queue)
