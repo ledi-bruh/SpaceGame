@@ -20,6 +20,9 @@ public class SendCommand : ICommand
         {
             sender.Send(_message);
         }
-        throw new Exception();
+        else
+        {
+            throw new Exception();
+        }
     }
 }

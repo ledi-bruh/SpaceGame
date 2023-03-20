@@ -14,7 +14,7 @@ public class SoftStopServerCommand : ICommand
     }
     public void Execute()
     {
-        if (_thread == Thread.CurrentThread)
+        if (_thread.isCurrent())
         {
             _thread.UpdateBehaviour(() =>
             {
@@ -23,7 +23,10 @@ public class SoftStopServerCommand : ICommand
                     _thread.Stop();
                     _action();
                 }
-                _thread.HandleCommand();
+                else
+                {
+                    _thread.HandleCommand();
+                }
             });
         }
         else

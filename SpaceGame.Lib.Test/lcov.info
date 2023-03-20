@@ -1,0 +1,821 @@
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Using\Vector.cs
+FN:6,System.Int32 Vector.Vector::get_Size()
+FNDA:8,System.Int32 Vector.Vector::get_Size()
+DA:7,8
+FN:15,System.Boolean Vector.Vector::Equals(System.Object)
+FNDA:5,System.Boolean Vector.Vector::Equals(System.Object)
+DA:16,5
+DA:17,5
+DA:18,5
+BRDA:17,9,0,4
+BRDA:17,9,1,1
+FN:20,System.Int32 Vector.Vector::GetHashCode()
+FNDA:4,System.Int32 Vector.Vector::GetHashCode()
+DA:21,4
+DA:23,4
+DA:24,4
+DA:25,24
+DA:26,4
+DA:28,4
+FN:30,Vector.Vector Vector.Vector::op_Addition(Vector.Vector,Vector.Vector)
+FNDA:4,Vector.Vector Vector.Vector::op_Addition(Vector.Vector,Vector.Vector)
+DA:31,4
+DA:32,5
+DA:33,9
+DA:34,3
+BRDA:32,20,0,1
+BRDA:32,20,1,3
+FN:8,System.Void Vector.Vector::.ctor(System.Int32[])
+FNDA:24,System.Void Vector.Vector::.ctor(System.Int32[])
+DA:9,24
+DA:10,24
+DA:11,25
+DA:12,23
+DA:13,23
+BRDA:11,15,0,1
+BRDA:11,15,1,23
+LF:19
+LH:19
+BRF:6
+BRH:6
+FNF:5
+FNH:5
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Using\Angle.cs
+FN:22,System.Int32 Angle.Angle::GCD(System.Int32,System.Int32)
+FNDA:7,System.Int32 Angle.Angle::GCD(System.Int32,System.Int32)
+DA:23,7
+DA:24,7
+DA:25,7
+DA:26,25
+DA:27,7
+DA:28,7
+BRDA:26,54,1,6
+BRDA:26,28,0,5
+BRDA:26,28,1,1
+BRDA:26,43,0,6
+BRDA:26,43,1,7
+BRDA:26,54,0,7
+FN:30,Angle.Angle Angle.Angle::Round(System.Int32)
+FNDA:8,Angle.Angle Angle.Angle::Round(System.Int32)
+DA:31,8
+DA:32,9
+DA:33,7
+DA:34,7
+BRDA:32,7,0,1
+BRDA:32,7,1,7
+FN:35,System.String Angle.Angle::ToString()
+FNDA:21,System.String Angle.Angle::ToString()
+DA:36,21
+DA:37,21
+FN:38,System.Boolean Angle.Angle::Equals(System.Object)
+FNDA:13,System.Boolean Angle.Angle::Equals(System.Object)
+DA:39,13
+DA:40,13
+DA:41,13
+BRDA:39,8,0,12
+BRDA:39,22,0,11
+BRDA:39,8,1,2
+BRDA:39,22,1,2
+FN:42,System.Int32 Angle.Angle::GetHashCode()
+FNDA:4,System.Int32 Angle.Angle::GetHashCode()
+DA:43,4
+FN:45,Angle.Angle Angle.Angle::op_Addition(Angle.Angle,Angle.Angle)
+FNDA:7,Angle.Angle Angle.Angle::op_Addition(Angle.Angle,Angle.Angle)
+DA:46,7
+DA:47,7
+DA:48,7
+DA:49,7
+DA:50,7
+DA:51,7
+FN:52,Angle.Angle Angle.Angle::op_Modulus(Angle.Angle,System.Int32)
+FNDA:8,Angle.Angle Angle.Angle::op_Modulus(Angle.Angle,System.Int32)
+DA:53,8
+FN:6,System.Void Angle.Angle::.ctor(System.Int32,System.Int32)
+FNDA:73,System.Void Angle.Angle::.ctor(System.Int32,System.Int32)
+DA:7,73
+DA:8,73
+DA:9,74
+DA:10,72
+DA:11,4
+DA:12,4
+DA:13,4
+DA:14,4
+DA:16,68
+DA:17,68
+DA:18,68
+DA:19,68
+DA:20,72
+BRDA:9,14,0,1
+BRDA:9,14,1,72
+BRDA:10,33,0,4
+BRDA:10,33,1,68
+LF:36
+LH:36
+BRF:16
+BRH:16
+FNF:8
+FNH:8
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Adapters\RecieverAdapter.cs
+FN:10,SpaceGame.Lib.ICommand SpaceGame.Lib.ReceiverAdapter::Receive()
+FNDA:11,SpaceGame.Lib.ICommand SpaceGame.Lib.ReceiverAdapter::Receive()
+DA:11,11
+DA:12,11
+DA:13,11
+FN:15,System.Boolean SpaceGame.Lib.ReceiverAdapter::isEmpty()
+FNDA:4,System.Boolean SpaceGame.Lib.ReceiverAdapter::isEmpty()
+DA:16,4
+DA:17,4
+DA:18,4
+FN:7,System.Void SpaceGame.Lib.ReceiverAdapter::.ctor(System.Collections.Concurrent.BlockingCollection`1<SpaceGame.Lib.ICommand>)
+FNDA:16,System.Void SpaceGame.Lib.ReceiverAdapter::.ctor(System.Collections.Concurrent.BlockingCollection`1<SpaceGame.Lib.ICommand>)
+DA:8,16
+LF:7
+LH:7
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Adapters\SenderAdapter.cs
+FN:10,System.Void SpaceGame.Lib.SenderAdapter::Send(SpaceGame.Lib.ICommand)
+FNDA:11,System.Void SpaceGame.Lib.SenderAdapter::Send(SpaceGame.Lib.ICommand)
+DA:11,11
+DA:12,11
+DA:13,11
+FN:7,System.Void SpaceGame.Lib.SenderAdapter::.ctor(System.Collections.Concurrent.BlockingCollection`1<SpaceGame.Lib.ICommand>)
+FNDA:16,System.Void SpaceGame.Lib.SenderAdapter::.ctor(System.Collections.Concurrent.BlockingCollection`1<SpaceGame.Lib.ICommand>)
+DA:8,16
+LF:4
+LH:4
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Classes\CollisionTreeBuilder.cs
+FN:6,System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IEnumerable`1<System.Int32>> SpaceGame.Lib.CollisionTreeBuilder::ReadDataFromFile(System.String)
+FNDA:8,System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IEnumerable`1<System.Int32>> SpaceGame.Lib.CollisionTreeBuilder::ReadDataFromFile(System.String)
+DA:7,8
+DA:8,2
+FN:10,System.Void SpaceGame.Lib.CollisionTreeBuilder::BuildTree(System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IEnumerable`1<System.Int32>>)
+FNDA:1,System.Void SpaceGame.Lib.CollisionTreeBuilder::BuildTree(System.Collections.Generic.IEnumerable`1<System.Collections.Generic.IEnumerable`1<System.Int32>>)
+DA:11,1
+DA:12,1
+DA:13,6
+DA:14,6
+DA:15,6
+DA:16,30
+DA:17,30
+DA:18,30
+DA:19,36
+DA:20,7
+DA:21,1
+FN:22,System.Void SpaceGame.Lib.CollisionTreeBuilder::BuildFromFile(System.String)
+FNDA:2,System.Void SpaceGame.Lib.CollisionTreeBuilder::BuildFromFile(System.String)
+DA:23,2
+LF:14
+LH:14
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\ActionCommand.cs
+FN:12,System.Void SpaceGame.Lib.ActionCommand::Execute()
+FNDA:35,System.Void SpaceGame.Lib.ActionCommand::Execute()
+DA:13,35
+FN:7,System.Void SpaceGame.Lib.ActionCommand::.ctor(System.Action)
+FNDA:36,System.Void SpaceGame.Lib.ActionCommand::.ctor(System.Action)
+DA:8,36
+DA:9,36
+DA:10,36
+DA:11,36
+LF:5
+LH:5
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\BuildCollisionTreeCommand.cs
+FN:9,System.Void SpaceGame.Lib.BuildCollisionTreeCommand::Execute()
+FNDA:2,System.Void SpaceGame.Lib.BuildCollisionTreeCommand::Execute()
+DA:10,2
+FN:7,System.Void SpaceGame.Lib.BuildCollisionTreeCommand::.ctor(System.String)
+FNDA:4,System.Void SpaceGame.Lib.BuildCollisionTreeCommand::.ctor(System.String)
+DA:8,4
+LF:2
+LH:2
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\CheckCollisionCommand.cs
+FN:14,System.Void SpaceGame.Lib.CheckCollisionCommand::Execute()
+FNDA:2,System.Void SpaceGame.Lib.CheckCollisionCommand::Execute()
+DA:15,2
+DA:16,2
+DA:17,2
+DA:18,2
+DA:19,2
+DA:21,2
+DA:22,2
+DA:23,2
+DA:24,2
+DA:25,2
+DA:26,2
+DA:28,2
+DA:30,7
+DA:32,1
+DA:33,1
+DA:34,1
+DA:35,1
+DA:36,1
+BRDA:32,305,0,1
+BRDA:32,305,1,1
+FN:7,System.Void SpaceGame.Lib.CheckCollisionCommand::.ctor(SpaceGame.Lib.IUObject,SpaceGame.Lib.IUObject)
+FNDA:2,System.Void SpaceGame.Lib.CheckCollisionCommand::.ctor(SpaceGame.Lib.IUObject,SpaceGame.Lib.IUObject)
+DA:8,2
+DA:9,2
+DA:10,2
+DA:11,2
+DA:12,2
+LF:23
+LH:23
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\EmptyCommand.cs
+FN:4,System.Void SpaceGame.Lib.EmptyCommand::Execute()
+FNDA:2,System.Void SpaceGame.Lib.EmptyCommand::Execute()
+DA:5,2
+LF:1
+LH:1
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\EndMovementCommand.cs
+FN:10,System.Void SpaceGame.Lib.EndMovementCommand::Execute()
+FNDA:3,System.Void SpaceGame.Lib.EndMovementCommand::Execute()
+DA:11,3
+DA:12,3
+DA:13,2
+DA:14,2
+DA:15,2
+DA:16,2
+DA:17,2
+DA:18,3
+DA:20,1
+DA:21,1
+DA:22,1
+DA:23,1
+DA:24,1
+DA:25,1
+FN:7,System.Void SpaceGame.Lib.EndMovementCommand::.ctor(SpaceGame.Lib.IEndable)
+FNDA:6,System.Void SpaceGame.Lib.EndMovementCommand::.ctor(SpaceGame.Lib.IEndable)
+DA:8,6
+LF:15
+LH:15
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\HardStopServerCommand.cs
+FN:11,System.Void SpaceGame.Lib.HardStopServerCommand::Execute()
+FNDA:6,System.Void SpaceGame.Lib.HardStopServerCommand::Execute()
+DA:12,6
+DA:13,6
+DA:14,5
+DA:15,5
+DA:16,5
+DA:18,1
+DA:19,1
+DA:21,5
+BRDA:13,14,0,5
+BRDA:13,14,1,1
+FN:8,System.Void SpaceGame.Lib.HardStopServerCommand::.ctor(SpaceGame.Lib.ServerThread)
+FNDA:12,System.Void SpaceGame.Lib.HardStopServerCommand::.ctor(SpaceGame.Lib.ServerThread)
+DA:9,12
+LF:9
+LH:9
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\InjectCommand.cs
+FN:8,System.Void SpaceGame.Lib.InjectCommand::Execute()
+FNDA:3,System.Void SpaceGame.Lib.InjectCommand::Execute()
+DA:9,3
+FN:10,System.Void SpaceGame.Lib.InjectCommand::Inject(System.Object)
+FNDA:1,System.Void SpaceGame.Lib.InjectCommand::Inject(System.Object)
+DA:11,1
+FN:6,System.Void SpaceGame.Lib.InjectCommand::.ctor(SpaceGame.Lib.ICommand)
+FNDA:4,System.Void SpaceGame.Lib.InjectCommand::.ctor(SpaceGame.Lib.ICommand)
+DA:7,4
+LF:3
+LH:3
+BRF:0
+BRH:0
+FNF:3
+FNH:3
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\MacroCommand.cs
+FN:8,System.Void SpaceGame.Lib.MacroCommand::Execute()
+FNDA:2,System.Void SpaceGame.Lib.MacroCommand::Execute()
+DA:9,2
+DA:10,4
+DA:11,2
+FN:6,System.Void SpaceGame.Lib.MacroCommand::.ctor(System.Collections.Generic.IEnumerable`1<SpaceGame.Lib.ICommand>)
+FNDA:4,System.Void SpaceGame.Lib.MacroCommand::.ctor(System.Collections.Generic.IEnumerable`1<SpaceGame.Lib.ICommand>)
+DA:7,4
+LF:4
+LH:4
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\MoveCommand.cs
+FN:8,System.Void SpaceGame.Lib.MoveCommand::Execute()
+FNDA:4,System.Void SpaceGame.Lib.MoveCommand::Execute()
+DA:9,4
+FN:6,System.Void SpaceGame.Lib.MoveCommand::.ctor(SpaceGame.Lib.IMovable)
+FNDA:8,System.Void SpaceGame.Lib.MoveCommand::.ctor(SpaceGame.Lib.IMovable)
+DA:7,8
+LF:2
+LH:2
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\RegisterHandlerCommand.cs
+FN:15,System.Void SpaceGame.Lib.RegisterHandlerCommand::Execute()
+FNDA:7,System.Void SpaceGame.Lib.RegisterHandlerCommand::Execute()
+DA:16,7
+DA:17,7
+DA:18,7
+DA:19,7
+DA:20,7
+DA:21,6
+FN:8,System.Void SpaceGame.Lib.RegisterHandlerCommand::.ctor(System.Collections.Generic.IEnumerable`1<System.Type>,SpaceGame.Lib.IHandler)
+FNDA:7,System.Void SpaceGame.Lib.RegisterHandlerCommand::.ctor(System.Collections.Generic.IEnumerable`1<System.Type>,SpaceGame.Lib.IHandler)
+DA:9,7
+DA:10,7
+DA:11,7
+DA:12,7
+DA:13,7
+LF:11
+LH:11
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\RepeatCommand.cs
+FN:9,System.Void SpaceGame.Lib.RepeatCommand::Execute()
+FNDA:1,System.Void SpaceGame.Lib.RepeatCommand::Execute()
+DA:10,1
+FN:7,System.Void SpaceGame.Lib.RepeatCommand::.ctor(SpaceGame.Lib.ICommand)
+FNDA:4,System.Void SpaceGame.Lib.RepeatCommand::.ctor(SpaceGame.Lib.ICommand)
+DA:8,4
+LF:2
+LH:2
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\RotateCommand.cs
+FN:8,System.Void SpaceGame.Lib.RotateCommand::Execute()
+FNDA:5,System.Void SpaceGame.Lib.RotateCommand::Execute()
+DA:9,5
+FN:6,System.Void SpaceGame.Lib.RotateCommand::.ctor(SpaceGame.Lib.IRotatable)
+FNDA:10,System.Void SpaceGame.Lib.RotateCommand::.ctor(SpaceGame.Lib.IRotatable)
+DA:7,10
+LF:2
+LH:2
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\SendCommand.cs
+FN:16,System.Void SpaceGame.Lib.SendCommand::Execute()
+FNDA:12,System.Void SpaceGame.Lib.SendCommand::Execute()
+DA:17,12
+DA:19,12
+DA:20,11
+DA:21,11
+DA:22,11
+DA:24,1
+DA:25,1
+DA:27,11
+BRDA:19,31,0,11
+BRDA:19,31,1,1
+FN:9,System.Void SpaceGame.Lib.SendCommand::.ctor(System.Int32,SpaceGame.Lib.ICommand)
+FNDA:12,System.Void SpaceGame.Lib.SendCommand::.ctor(System.Int32,SpaceGame.Lib.ICommand)
+DA:10,12
+DA:11,12
+DA:12,12
+DA:13,12
+DA:14,12
+LF:13
+LH:13
+BRF:2
+BRH:2
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\SoftStopServerCommand.cs
+FN:15,System.Void SpaceGame.Lib.SoftStopServerCommand::Execute()
+FNDA:4,System.Void SpaceGame.Lib.SoftStopServerCommand::Execute()
+DA:16,4
+DA:17,4
+DA:18,3
+DA:19,3
+DA:20,4
+DA:21,4
+DA:22,3
+DA:23,3
+DA:24,3
+DA:25,3
+DA:26,3
+DA:27,1
+DA:28,1
+DA:29,1
+DA:30,7
+DA:31,3
+DA:33,1
+DA:34,1
+DA:36,3
+BRDA:17,14,0,3
+BRDA:17,14,1,1
+FN:9,System.Void SpaceGame.Lib.SoftStopServerCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
+FNDA:4,System.Void SpaceGame.Lib.SoftStopServerCommand::.ctor(SpaceGame.Lib.ServerThread,System.Action)
+DA:10,4
+DA:11,4
+DA:12,4
+DA:13,4
+DA:14,4
+LF:24
+LH:24
+BRF:4
+BRH:4
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Commands\StartMovementCommand.cs
+FN:10,System.Void SpaceGame.Lib.StartMovementCommand::Execute()
+FNDA:3,System.Void SpaceGame.Lib.StartMovementCommand::Execute()
+DA:11,3
+DA:12,3
+DA:13,2
+DA:14,2
+DA:15,2
+DA:16,2
+DA:17,2
+DA:18,2
+DA:19,3
+DA:21,1
+DA:23,1
+DA:25,1
+DA:26,1
+FN:7,System.Void SpaceGame.Lib.StartMovementCommand::.ctor(SpaceGame.Lib.IStartable)
+FNDA:6,System.Void SpaceGame.Lib.StartMovementCommand::.ctor(SpaceGame.Lib.IStartable)
+DA:8,6
+LF:14
+LH:14
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Server\ServerThread.cs
+FN:9,System.Void SpaceGame.Lib.ServerThread::Stop()
+FNDA:8,System.Void SpaceGame.Lib.ServerThread::Stop()
+DA:10,8
+FN:12,System.Void SpaceGame.Lib.ServerThread::HandleCommand()
+FNDA:11,System.Void SpaceGame.Lib.ServerThread::HandleCommand()
+DA:13,11
+DA:14,11
+DA:16,11
+DA:17,11
+FN:34,System.Void SpaceGame.Lib.ServerThread::UpdateBehaviour(System.Action)
+FNDA:3,System.Void SpaceGame.Lib.ServerThread::UpdateBehaviour(System.Action)
+DA:35,3
+DA:36,3
+DA:37,3
+FN:38,System.Void SpaceGame.Lib.ServerThread::Start()
+FNDA:8,System.Void SpaceGame.Lib.ServerThread::Start()
+DA:39,8
+DA:40,8
+DA:41,8
+FN:43,System.Boolean SpaceGame.Lib.ServerThread::isEmpty()
+FNDA:4,System.Boolean SpaceGame.Lib.ServerThread::isEmpty()
+DA:44,4
+DA:45,4
+DA:46,4
+FN:48,System.Boolean SpaceGame.Lib.ServerThread::isCurrent()
+FNDA:10,System.Boolean SpaceGame.Lib.ServerThread::isCurrent()
+DA:49,10
+DA:50,10
+DA:51,10
+FN:22,System.Void SpaceGame.Lib.ServerThread::<.ctor>b__6_0()
+FNDA:10,System.Void SpaceGame.Lib.ServerThread::<.ctor>b__6_0()
+DA:23,10
+DA:24,10
+DA:25,18
+FN:27,System.Void SpaceGame.Lib.ServerThread::<.ctor>b__6_1()
+FNDA:8,System.Void SpaceGame.Lib.ServerThread::<.ctor>b__6_1()
+DA:28,8
+DA:29,22
+DA:30,14
+DA:31,16
+BRDA:29,26,1,14
+BRDA:29,26,0,8
+FN:6,System.Void SpaceGame.Lib.ServerThread::.ctor(SpaceGame.Lib.IReceiver)
+FNDA:8,System.Void SpaceGame.Lib.ServerThread::.ctor(SpaceGame.Lib.IReceiver)
+DA:7,8
+DA:19,8
+DA:20,8
+DA:21,8
+DA:22,8
+DA:27,8
+DA:32,8
+LF:31
+LH:31
+BRF:2
+BRH:2
+FNF:9
+FNH:9
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\CreateAndStrategyServerStrategy.cs
+FN:7,System.Object SpaceGame.Lib.CreateAndStartServerStrategy::Invoke(System.Object[])
+FNDA:8,System.Object SpaceGame.Lib.CreateAndStartServerStrategy::Invoke(System.Object[])
+DA:8,8
+DA:10,12
+DA:11,8
+DA:12,8
+DA:13,6
+DA:14,6
+DA:15,6
+DA:16,8
+DA:18,8
+DA:19,8
+DA:21,8
+DA:22,8
+DA:24,8
+DA:25,8
+DA:26,8
+DA:27,8
+DA:28,8
+DA:29,8
+DA:30,8
+DA:31,16
+DA:33,8
+BRDA:12,68,0,6
+BRDA:12,68,1,8
+LF:21
+LH:21
+BRF:2
+BRH:2
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\CreateMacroCommandStrategy.cs
+FN:6,System.Object SpaceGame.Lib.CreateMacroCommandStrategy::Invoke(System.Object[])
+FNDA:1,System.Object SpaceGame.Lib.CreateMacroCommandStrategy::Invoke(System.Object[])
+DA:7,1
+DA:8,1
+DA:9,1
+DA:11,1
+DA:12,1
+DA:13,1
+DA:14,1
+DA:16,1
+DA:17,1
+LF:9
+LH:9
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\CreateOperationStrategy.cs
+FN:10,System.Object SpaceGame.Lib.CreateOperationStrategy::Invoke(System.Object[])
+FNDA:1,System.Object SpaceGame.Lib.CreateOperationStrategy::Invoke(System.Object[])
+DA:11,1
+DA:12,1
+DA:14,1
+DA:16,1
+DA:18,1
+DA:20,1
+DA:22,1
+DA:23,1
+DA:25,1
+DA:26,1
+FN:7,System.Void SpaceGame.Lib.CreateOperationStrategy::.ctor(System.String)
+FNDA:2,System.Void SpaceGame.Lib.CreateOperationStrategy::.ctor(System.String)
+DA:8,2
+LF:11
+LH:11
+BRF:0
+BRH:0
+FNF:2
+FNH:2
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\FindHandlerStrategy.cs
+FN:6,System.Object SpaceGame.Lib.FindHanlderStrategy::Invoke(System.Object[])
+FNDA:2,System.Object SpaceGame.Lib.FindHanlderStrategy::Invoke(System.Object[])
+DA:7,2
+DA:8,2
+DA:10,2
+DA:12,2
+DA:13,1
+DA:14,1
+DA:16,1
+DA:17,2
+BRDA:12,56,0,1
+BRDA:12,56,1,1
+LF:8
+LH:8
+BRF:2
+BRH:2
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\GetHashCodeInAnyOrderStrategy.cs
+FN:6,System.Object SpaceGame.Lib.GetHashCodeInAnyOrderStrategy::Invoke(System.Object[])
+FNDA:12,System.Object SpaceGame.Lib.GetHashCodeInAnyOrderStrategy::Invoke(System.Object[])
+DA:7,12
+DA:8,12
+DA:10,36
+DA:11,12
+LF:4
+LH:4
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\GetHashCodeStrategy.cs
+FN:5,System.Object SpaceGame.Lib.GetHashCodeStrategy::Invoke(System.Object[])
+FNDA:17,System.Object SpaceGame.Lib.GetHashCodeStrategy::Invoke(System.Object[])
+DA:6,17
+DA:7,17
+DA:10,17
+DA:11,52
+DA:13,17
+LF:5
+LH:5
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\HardStopServerStrategy.cs
+FN:8,System.Object SpaceGame.Lib.HardStopServerStrategy::Invoke(System.Object[])
+FNDA:6,System.Object SpaceGame.Lib.HardStopServerStrategy::Invoke(System.Object[])
+DA:9,6
+DA:10,8
+DA:11,6
+DA:12,6
+DA:13,4
+DA:14,4
+DA:15,4
+DA:18,6
+DA:19,5
+DA:20,5
+DA:21,5
+DA:22,5
+DA:23,5
+DA:24,5
+DA:25,10
+DA:27,1
+DA:28,5
+BRDA:12,61,0,4
+BRDA:12,61,1,6
+BRDA:18,106,0,5
+BRDA:18,106,1,1
+LF:17
+LH:17
+BRF:4
+BRH:4
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\OperationMovementStrategy.cs
+FN:6,System.Object SpaceGame.Lib.OperationMovementStrategy::Invoke(System.Object[])
+FNDA:1,System.Object SpaceGame.Lib.OperationMovementStrategy::Invoke(System.Object[])
+DA:7,1
+DA:8,1
+DA:10,1
+DA:12,1
+DA:13,1
+DA:14,1
+DA:16,1
+DA:18,1
+DA:20,1
+DA:21,1
+DA:23,1
+DA:24,1
+LF:12
+LH:12
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\RegisterThreadSenderStrategy.cs
+FN:8,System.Object SpaceGame.Lib.RegisterThreadSenderStrategy::Invoke(System.Object[])
+FNDA:8,System.Object SpaceGame.Lib.RegisterThreadSenderStrategy::Invoke(System.Object[])
+DA:9,8
+DA:10,8
+DA:11,8
+DA:12,8
+DA:13,8
+DA:14,8
+DA:15,8
+DA:16,16
+DA:17,8
+LF:9
+LH:9
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\RegisterThreadStrategy.cs
+FN:8,System.Object SpaceGame.Lib.RegisterThreadStrategy::Invoke(System.Object[])
+FNDA:8,System.Object SpaceGame.Lib.RegisterThreadStrategy::Invoke(System.Object[])
+DA:9,8
+DA:10,8
+DA:11,8
+DA:12,8
+DA:13,8
+DA:14,8
+DA:15,8
+DA:16,16
+DA:17,8
+LF:9
+LH:9
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\SendCommandStrategy.cs
+FN:6,System.Object SpaceGame.Lib.SendCommandStrategy::Invoke(System.Object[])
+FNDA:4,System.Object SpaceGame.Lib.SendCommandStrategy::Invoke(System.Object[])
+DA:7,4
+DA:8,4
+DA:9,4
+DA:10,4
+DA:11,4
+LF:5
+LH:5
+BRF:0
+BRH:0
+FNF:1
+FNH:1
+end_of_record
+SF:D:\OOAIP\SpaceGame\SpaceGame.Lib\Strategies\SoftStopServerStrategy.cs
+FN:8,System.Object SpaceGame.Lib.SoftStopServerStrategy::Invoke(System.Object[])
+FNDA:4,System.Object SpaceGame.Lib.SoftStopServerStrategy::Invoke(System.Object[])
+DA:9,4
+DA:10,4
+DA:11,4
+DA:12,4
+DA:13,3
+DA:14,3
+DA:15,3
+DA:18,4
+DA:19,3
+DA:20,3
+DA:21,3
+DA:22,3
+DA:23,3
+DA:24,6
+DA:26,1
+DA:27,3
+BRDA:12,50,0,3
+BRDA:12,50,1,4
+BRDA:18,90,0,3
+BRDA:18,90,1,1
+LF:16
+LH:16
+BRF:4
+BRH:4
+FNF:1
+FNH:1
+end_of_record

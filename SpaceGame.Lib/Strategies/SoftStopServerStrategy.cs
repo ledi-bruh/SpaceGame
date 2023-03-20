@@ -7,13 +7,9 @@ public class SoftStopServerStrategy : IStrategy //Server.Stop.Soft
 {
     public object Invoke(params object[] args)
     {
+        Action action = () => { };
         int id = (int)args[0];
-        Action action;
-        if (args[1] is null)
-        {
-            action = () => { };
-        }
-        else
+        if (args.Length == 2)
         {
             action = (Action)args[1];
         }

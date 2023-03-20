@@ -7,13 +7,9 @@ public class CreateAndStartServerStrategy : IStrategy  //"Server.Thread.Create.S
     public object Invoke(params object[] args)
     {
 
-        Action action;
+        Action action = () => { };
         int id = (int)args[0];
-        if (args[1] is null)
-        {
-            action = () => { };
-        }
-        else
+        if (args.Length == 2)
         {
             action = (Action)args[1];
         }
@@ -25,11 +21,11 @@ public class CreateAndStartServerStrategy : IStrategy  //"Server.Thread.Create.S
         var receiver = new ReceiverAdapter(queue);
         var register_thread_cmd = IoC.Resolve<ICommand>("Server.Register.Thread", id, receiver);
 
-        var thread = IoC.Resolve<Dictionary<int, ServerThread>>("Server.Thread.Map")[id];
         return new ActionCommand(() =>
         {
             register_sender_cmd.Execute();
             register_thread_cmd.Execute();
+            var thread = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map")[id];
             thread.Start();
             action();
         });

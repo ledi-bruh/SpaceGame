@@ -10,7 +10,7 @@ public class HardStopServerCommand : ICommand
 
     public void Execute()
     {
-        if(_thread == Thread.CurrentThread)
+        if(_thread.isCurrent())
         {
             _thread.Stop();   
         }

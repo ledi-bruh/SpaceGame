@@ -45,22 +45,8 @@ public class ServerThread
         return queue.isEmpty();
     }
 
-    public override bool Equals(object? obj)
+    internal bool isCurrent()
     {
-        return obj is Thread b && b == _thread;
-    }
-
-    public override int GetHashCode()
-    {
-        return _thread.GetHashCode();
-    }
-
-    public static bool operator ==(ServerThread a, Thread b)
-    {
-        return a._thread == b;
-    }
-    public static bool operator !=(ServerThread a, Thread b)
-    {
-        return !(a == b);
+        return _thread == Thread.CurrentThread;
     }
 }
