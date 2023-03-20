@@ -1,6 +1,6 @@
 namespace SpaceGame.Lib;
 
-public class LogFileHandler : IHandler
+public class LogFileHandler : IHandler  // "Exception.Handler.Log.Create"
 {
     private string _log_file_path;
     private IEnumerable<Type> _types;
