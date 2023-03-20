@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 using Hwdtech;
 
-public class SetDefaultHandlerCommand : ICommand
+public class SetDefaultHandlerCommand : ICommand  // "Exception.Handler.Default.Set"
 {
     private IHandler _handler;
 
