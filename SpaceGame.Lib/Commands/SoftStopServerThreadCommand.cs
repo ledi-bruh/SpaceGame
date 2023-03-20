@@ -23,15 +23,9 @@ public class SoftStopServerThreadCommand : ICommand
                     _thread.Stop();
                     _action();
                 }
-                else
-                {
-                    _thread.HandleCommand();
-                }
+                else _thread.HandleCommand();
             });
         }
-        else
-        {
-            throw new Exception();
-        }
+        else throw new Exception();
     }
 }

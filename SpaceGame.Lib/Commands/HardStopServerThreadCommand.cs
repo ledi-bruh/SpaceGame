@@ -14,9 +14,6 @@ public class HardStopServerThreadCommand : ICommand
         {
             _thread.Stop();   
         }
-        else
-        {
-            throw new Exception();
-        }
+        else throw new Exception();
     }
 }

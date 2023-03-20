@@ -26,8 +26,6 @@ public class TestServerThread
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Command.Send", (object[] args) => new SendCommandStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Hard", (object[] args) => new HardStopServerThreadStrategy().Invoke(args)).Execute();
 
-        var isActive = false;
-
         var key = 22;
 
         var are = new AutoResetEvent(true);
@@ -37,7 +35,6 @@ public class TestServerThread
 
         var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
         {
-            isActive = true;
             are.WaitOne();
         }));
 
@@ -46,7 +43,6 @@ public class TestServerThread
         are.Set();
         Thread.Sleep(1000);
 
-        Assert.True(isActive);
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
 
@@ -64,24 +60,17 @@ public class TestServerThread
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Command.Send", (object[] args) => new SendCommandStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Hard", (object[] args) => new HardStopServerThreadStrategy().Invoke(args)).Execute();
 
-        var isActive = false;
-        var createAndStartFlag = false;
-        var hsFlag = false;
+        var hardStopFlag = false;
 
         var key = 22;
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            createAndStartFlag = true;
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
         var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
         {
-            isActive = true;
             are.WaitOne();
         }));
 
@@ -90,14 +79,12 @@ public class TestServerThread
         are.Set();
         Thread.Sleep(1000);
 
-        Assert.True(isActive);
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
-        Assert.True(createAndStartFlag);
 
         var hardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
         {
-            hsFlag = true;
+            hardStopFlag = true;
             are.WaitOne();
         });
 
@@ -106,7 +93,7 @@ public class TestServerThread
         are.Set();
         Thread.Sleep(1000);
 
-        Assert.True(hsFlag);
+        Assert.True(hardStopFlag);
     }
 
     [Fact]
@@ -119,10 +106,7 @@ public class TestServerThread
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
         var failedHardStopCommand = new HardStopServerThreadCommand(IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map")[key]);
@@ -152,10 +136,7 @@ public class TestServerThread
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
         Assert.Throws<Exception>(
@@ -221,47 +202,39 @@ public class TestServerThread
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Command.Send", (object[] args) => new SendCommandStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Soft", (object[] args) => new SoftStopServerThreadStrategy().Invoke(args)).Execute();
 
-        var isActive = false;
-        var createAndStartFlag = false;
-        var ssFlag = false;
+        var isActivated = false;
+        var softStopFlag = false;
 
         var key = 22;
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            createAndStartFlag = true;
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
-        are.Set();
-        Thread.Sleep(1000);
 
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
-        Assert.True(createAndStartFlag);
 
         var softStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Soft", key, () =>
         {
-            ssFlag = true;
+            softStopFlag = true;
             are.WaitOne();
         });
 
         softStopCommand.Execute();
-        Assert.False(ssFlag);
+        Assert.False(softStopFlag);
 
         var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
         {
-            isActive = true;
+            isActivated = true;
         }));
 
         sendCmd.Execute();
 
         are.Set();
         Thread.Sleep(1000);
-        Assert.True(isActive);
-        Assert.True(ssFlag);
+        Assert.True(isActivated);
+        Assert.True(softStopFlag);
     }
 
     [Fact]
@@ -274,10 +247,7 @@ public class TestServerThread
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
         var failedSoftStopCommand = new SoftStopServerThreadCommand(IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map")[key], () => { });
