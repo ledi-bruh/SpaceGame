@@ -28,7 +28,6 @@ public class CreateAndStartServerThreadStrategy : IStrategy  //"Server.Thread.Cr
             var thread = IoC.Resolve<ConcurrentDictionary<int, ServerThread>>("Server.Thread.Map")[id];
             thread.Start();
             action();
-        });
-        // Action<object> action = Action    
+        }); 
     }
 }
