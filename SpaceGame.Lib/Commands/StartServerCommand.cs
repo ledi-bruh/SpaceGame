@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 using Hwdtech;
 
-public class StartServerCommand : ICommand
+public class StartServerCommand : ICommand  // "Server.Start"
 {
     private int _threadCount;
 
