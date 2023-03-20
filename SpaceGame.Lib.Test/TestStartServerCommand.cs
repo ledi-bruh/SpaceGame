@@ -17,7 +17,7 @@ public class TestStartServerCommand
     [Fact]
     public void SuccessfulStartingServer()
     {
-        var threadCount = 5;
+        var threadCount = 73;
         var mockCommand = new Mock<SpaceGame.Lib.ICommand>();
         mockCommand.Setup(c => c.Execute()).Verifiable();
 

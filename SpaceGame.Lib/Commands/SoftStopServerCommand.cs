@@ -2,11 +2,11 @@ namespace SpaceGame.Lib;
 using Hwdtech;
 using System.Collections.Concurrent;
 
-public class SoftStopServerCommand : ICommand
+public class SoftStopServerCommand : ICommand  // "Server.Stop.Soft"
 {
     public void Execute()
     {
-        IoC.Resolve<ConcurrentDictionary<int, ISender>>("Server.Thread.Sender.Map").ToList().ForEach(
+        IoC.Resolve<ConcurrentDictionary<int, object>>("Server.Thread.Map").ToList().ForEach(
             pair => IoC.Resolve<ICommand>(
                 "Server.Thread.Command.Send",
                 pair.Key,
