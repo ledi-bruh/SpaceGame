@@ -2,12 +2,9 @@ namespace SpaceGame.Lib;
 
 public class ServerThread
 {
-    Thread thread;
-
+    private Thread _thread;
     IReceiver queue;
-
     bool stop = false;
-
     Action strategy;
 
     internal void Stop() => stop = true;
@@ -27,11 +24,10 @@ public class ServerThread
             HandleCommand();
         };
 
-        thread = new Thread(() =>
+        _thread = new Thread(() =>
         {
             while (!stop)
                 strategy();
-            
         });
     }
 
@@ -39,9 +35,32 @@ public class ServerThread
     {
         strategy = newBehaviour;
     }
-
-    public void Execute()
+    public void Start()
     {
-        thread.Start();
+        _thread.Start();
+    }
+
+    internal bool isEmpty()
+    {
+        return queue.isEmpty();
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is Thread b && b == _thread;
+    }
+
+    public override int GetHashCode()
+    {
+        return _thread.GetHashCode();
+    }
+
+    public static bool operator ==(ServerThread a, Thread b)
+    {
+        return a._thread == b;
+    }
+    public static bool operator !=(ServerThread a, Thread b)
+    {
+        return !(a == b);
     }
 }
