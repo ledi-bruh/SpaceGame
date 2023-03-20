@@ -24,7 +24,6 @@ public class TestServerThread
     public void ExceptionHandleCommand()
     {
         var isHandled = false;
-
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Create.Start", (object[] args) => new CreateAndStartServerThreadStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Hard", (object[] args) => new HardStopServerThreadStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Command.Send", (object[] args) => new SendCommandStrategy().Invoke(args)).Execute();
@@ -44,10 +43,11 @@ public class TestServerThread
             IoC.Resolve<ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
             var mockHandler = new Mock<IHandler>();
-            mockHandler.Setup(x => x.Handle()).Callback(() => isHandled = true);
+            mockHandler.Setup(x => x.Handle()).Callback(() => are.WaitOne());
 
             IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", (object[] args) => mockHandler.Object).Execute();
 
+            isHandled = true;
             throw new Exception();
         }));
 

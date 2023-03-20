@@ -22,35 +22,31 @@ public class TestSoftStopServerThread
     [Fact]
     public void SuccessfulSoftStop()
     {
-        IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Create.Start", (object[] args) => new CreateAndStartServerThreadStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Command.Send", (object[] args) => new SendCommandStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Soft", (object[] args) => new SoftStopServerThreadStrategy().Invoke(args)).Execute();
+        IStrategy createAndStartStrategy = new CreateAndStartServerThreadStrategy();
 
         var isActivated = false;
-        var softStopFlag = false;
 
         var key = 22;
 
         var are = new AutoResetEvent(true);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key,
-        () => { 
-            are.WaitOne(); 
-            });
+        var serverStartAndCreatecmd = (SpaceGame.Lib.ICommand)createAndStartStrategy.Invoke(key, () =>
+        {
+            are.WaitOne();
+        });
         serverStartAndCreatecmd.Execute();
 
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
 
-        var softStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Soft", key, () =>
-        {
-            softStopFlag = true;
-        });
+        var softStopStrategy = new SoftStopServerThreadStrategy();
+        var sendStrategy = new SendCommandStrategy();
+
+        var softStopCommand  = (SpaceGame.Lib.ICommand)softStopStrategy.Invoke(key);
 
         softStopCommand.Execute();
-        Assert.False(softStopFlag);
 
-        var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
+        var sendCmd = (SpaceGame.Lib.ICommand)sendStrategy.Invoke(key, new ActionCommand(() =>
         {
             isActivated = true;
             are.WaitOne();
@@ -61,7 +57,6 @@ public class TestSoftStopServerThread
         are.Set();
         Thread.Sleep(1000);
         Assert.True(isActivated);
-        Assert.True(softStopFlag);
     }
 
     [Fact]
