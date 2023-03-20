@@ -43,11 +43,10 @@ public class TestServerThread
             IoC.Resolve<ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
             var mockHandler = new Mock<IHandler>();
-            mockHandler.Setup(x => x.Handle()).Callback(() => are.WaitOne());
+            mockHandler.Setup(x => x.Handle()).Callback(() => isHandled = true);
 
             IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", (object[] args) => mockHandler.Object).Execute();
 
-            isHandled = true;
             throw new Exception();
         }));
 
