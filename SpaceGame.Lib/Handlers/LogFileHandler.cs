@@ -13,7 +13,7 @@ public class LogFileHandler : IHandler  // "Exception.Handler.Log.Create"
 
     public void Handle()
     {
-        string line = String.Join(" ~ ", _types.Select(t => t.ToString())) +  Environment.NewLine;
+        string line = String.Join(" ~ ", _types.Select(t => t.ToString())) + Environment.NewLine;
         File.AppendAllText(_log_file_path, line);
     }
 }
