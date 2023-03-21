@@ -28,6 +28,7 @@ public class TestSoftStopServerThread
 
         var isActivated = false;
         var isCreated = false;
+        var ssflag = false;
 
         var key = 22;
 
@@ -42,7 +43,11 @@ public class TestSoftStopServerThread
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
 
-        var softStopCommand  = (SpaceGame.Lib.ICommand)softStopStrategy.Invoke(key);
+        var softStopCommand  = (SpaceGame.Lib.ICommand)softStopStrategy.Invoke(key, () =>
+        {
+            ssflag = true;
+            are.Set();
+        });
 
         softStopCommand.Execute();
 
@@ -55,8 +60,10 @@ public class TestSoftStopServerThread
         sendCmd.Execute();
 
         are.WaitOne();
+        are.WaitOne();
         Assert.True(isActivated);
         Assert.True(isCreated);
+        Assert.True(ssflag);
     }
 
     [Fact]
