@@ -22,25 +22,25 @@ public class TestSoftStopServerThread
     [Fact]
     public void SuccessfulSoftStop()
     {
-        IStrategy createAndStartStrategy = new CreateAndStartServerThreadStrategy();
+        var createAndStartStrategy = new CreateAndStartServerThreadStrategy();
+        var softStopStrategy = new SoftStopServerThreadStrategy();
+        var sendStrategy = new SendCommandStrategy();
 
         var isActivated = false;
+        var isCreated = false;
 
         var key = 22;
 
-        var are = new AutoResetEvent(true);
+        var are = new AutoResetEvent(false);
 
-        var serverStartAndCreatecmd = (SpaceGame.Lib.ICommand)createAndStartStrategy.Invoke(key, () =>
+        var serverStartAndCreatecmd = (SpaceGame.Lib.ICommand)createAndStartStrategy.Invoke(key, () => 
         {
-            are.WaitOne();
+            isCreated = true;
         });
         serverStartAndCreatecmd.Execute();
 
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
-
-        var softStopStrategy = new SoftStopServerThreadStrategy();
-        var sendStrategy = new SendCommandStrategy();
 
         var softStopCommand  = (SpaceGame.Lib.ICommand)softStopStrategy.Invoke(key);
 
@@ -49,14 +49,14 @@ public class TestSoftStopServerThread
         var sendCmd = (SpaceGame.Lib.ICommand)sendStrategy.Invoke(key, new ActionCommand(() =>
         {
             isActivated = true;
-            are.WaitOne();
+            are.Set();
         }));
 
         sendCmd.Execute();
 
-        are.Set();
-        Thread.Sleep(1000);
+        are.WaitOne();
         Assert.True(isActivated);
+        Assert.True(isCreated);
     }
 
     [Fact]
@@ -66,8 +66,10 @@ public class TestSoftStopServerThread
         IoC.Resolve<ICommand>("IoC.Register", "Server.Thread.Stop.Soft", (object[] args) => new SoftStopServerThreadStrategy().Invoke(args)).Execute();
 
         var key = 22;
+        
+        var ssflag = false;
 
-        var are = new AutoResetEvent(true);
+        var are = new AutoResetEvent(false);
 
         var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
@@ -78,13 +80,13 @@ public class TestSoftStopServerThread
 
         var successfulSoftStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Soft", key, () =>
         {
-            are.WaitOne();
+            ssflag = true;
+            are.Set();
         });
 
         successfulSoftStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
+        are.WaitOne();
+        Assert.True(ssflag);
     }
 
     [Fact]
@@ -97,12 +99,7 @@ public class TestSoftStopServerThread
 
         var falsekey = 23;
 
-        var are = new AutoResetEvent(true);
-
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
         Assert.Throws<Exception>(
@@ -112,14 +109,8 @@ public class TestSoftStopServerThread
             }
         );
 
-        var successfulSoftStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Soft", key, () =>
-        {
-            are.WaitOne();
-        });
+        var successfulSoftStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Soft", key);
 
         successfulSoftStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
     }
 }

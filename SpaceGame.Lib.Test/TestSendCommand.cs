@@ -28,16 +28,11 @@ public class TestSendCommand
 
         var key = 22;
         var falsekey = 23;
-
-        var are = new AutoResetEvent(true);
-
+        
         var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
-        var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", falsekey, new ActionCommand(() =>
-        {
-            are.WaitOne();
-        }));
+        var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", falsekey, new ActionCommand(() => { }));
 
         Assert.Throws<Exception>(
             () =>
@@ -46,14 +41,8 @@ public class TestSendCommand
             }
         );
 
-        var hardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
-        {
-            are.WaitOne();
-        });
+        var hardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key);
 
         hardStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
     }
 }

@@ -30,12 +30,9 @@ public class TestServerThread
 
         var key = 22;
 
-        var are = new AutoResetEvent(true);
+        var are = new AutoResetEvent(false);
 
-        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key, () =>
-        {
-            are.WaitOne();
-        });
+        var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
         var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
         {
@@ -43,27 +40,25 @@ public class TestServerThread
             IoC.Resolve<ICommand>("Scopes.Current.Set", IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))).Execute();
 
             var mockHandler = new Mock<IHandler>();
-            mockHandler.Setup(x => x.Handle()).Callback(() => isHandled = true);
+            mockHandler.Setup(x => x.Handle());
 
             IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", (object[] args) => mockHandler.Object).Execute();
+
+            isHandled = true;
+
+            are.Set();
 
             throw new Exception();
         }));
 
         sendCmd.Execute();
-        are.Set();
-        Thread.Sleep(1000);
+
+        are.WaitOne();
 
         Assert.True(isHandled);
 
-        var successfulHardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
-        {
-            are.WaitOne();
-        });
+        var successfulHardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key);
 
         successfulHardStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
     }
 }

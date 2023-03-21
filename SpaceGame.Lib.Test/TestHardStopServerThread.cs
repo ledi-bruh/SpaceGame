@@ -30,34 +30,22 @@ public class TestHardStopServerThread
 
         var key = 22;
 
-        var are = new AutoResetEvent(true);
+        var are = new AutoResetEvent(false);
 
         var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
-
-        var sendCmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Command.Send", key, new ActionCommand(() =>
-        {
-            are.WaitOne();
-        }));
-
-        sendCmd.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
-
+        
         Assert.True(serverThreadMap.Count() == 1);
         Assert.True(serverThreadSenderMap.Count() == 1);
 
         var hardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
         {
             hardStopFlag = true;
-            are.WaitOne();
+            are.Set();
         });
 
         hardStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
+        are.WaitOne();
 
         Assert.True(hardStopFlag);
     }
@@ -70,8 +58,6 @@ public class TestHardStopServerThread
 
         var key = 22;
 
-        var are = new AutoResetEvent(true);
-
         var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
 
@@ -81,13 +67,9 @@ public class TestHardStopServerThread
 
         var successfulHardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
         {
-            are.WaitOne();
         });
 
         successfulHardStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
     }
 
     [Fact]
@@ -99,8 +81,6 @@ public class TestHardStopServerThread
         var key = 22;
 
         var falsekey = 23;
-
-        var are = new AutoResetEvent(true);
 
         var serverStartAndCreatecmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Create.Start", key);
         serverStartAndCreatecmd.Execute();
@@ -114,12 +94,8 @@ public class TestHardStopServerThread
 
         var successfulHardStopCommand = IoC.Resolve<SpaceGame.Lib.ICommand>("Server.Thread.Stop.Hard", key, () =>
         {
-            are.WaitOne();
         });
 
         successfulHardStopCommand.Execute();
-
-        are.Set();
-        Thread.Sleep(1000);
     }
 }
