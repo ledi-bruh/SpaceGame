@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceGame.Lib", "SpaceGame.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceGame.Lib.Test", "SpaceGame.Lib.Test\SpaceGame.Lib.Test.csproj", "{E3D8173F-8420-420C-88F8-2E858B04DEE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceGame.Console", "SpaceGame.Console\SpaceGame.Console.csproj", "{8FED11D2-A5A0-4ADD-B9CA-74CF29EE8481}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{E3D8173F-8420-420C-88F8-2E858B04DEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3D8173F-8420-420C-88F8-2E858B04DEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3D8173F-8420-420C-88F8-2E858B04DEE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FED11D2-A5A0-4ADD-B9CA-74CF29EE8481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FED11D2-A5A0-4ADD-B9CA-74CF29EE8481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FED11D2-A5A0-4ADD-B9CA-74CF29EE8481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FED11D2-A5A0-4ADD-B9CA-74CF29EE8481}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
