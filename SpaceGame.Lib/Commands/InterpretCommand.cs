@@ -3,9 +3,9 @@ using Hwdtech;
 
 public class InterpretCommand : ICommand 
 {
-    IInterpretetingMessage _message;
+    IInterpretingMessage _message;
 
-    public InterpretCommand(IInterpretetingMessage message) => _message = message;
+    public InterpretCommand(IInterpretingMessage message) => _message = message;
 
     public void Execute()
     {

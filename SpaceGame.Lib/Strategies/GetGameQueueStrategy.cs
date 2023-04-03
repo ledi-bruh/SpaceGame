@@ -14,6 +14,7 @@ public class GetGameQueueStrategy : IStrategy  // "Game.Get.Queue"
         {
             return queue;
         }
+
         throw new Exception();
     }
 }

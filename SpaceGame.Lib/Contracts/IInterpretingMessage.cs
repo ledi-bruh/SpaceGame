@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 
 
-public interface IInterpretetingMessage
+public interface IInterpretingMessage
 {
     public int GameID { get; }
     public int ObjectID { get; }

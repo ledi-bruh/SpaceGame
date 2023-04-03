@@ -5,7 +5,7 @@ public class CreateGameCommandFromMessageStrategy : IStrategy  // "Game.Command.
 {
     public object Invoke(params object[] args)
     {
-        IInterpretetingMessage message = (IInterpretetingMessage)args[0];
+        IInterpretingMessage message = (IInterpretingMessage)args[0];
 
         var obj = IoC.Resolve<IUObject>("Game.Get.UObject", message.ObjectID);
 
