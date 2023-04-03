@@ -57,7 +57,7 @@ public class TestInterpretCommand
         mockUObject.Setup(x => x.SetProperty(It.IsAny<string>(), It.IsAny<object>())).Verifiable();
 
         Mock<IInterpretingMessage> mockMessage = new Mock<IInterpretingMessage>();
-        mockMessage.SetupGet(x => x.GameID).Returns(2);
+        mockMessage.SetupGet(x => x.GameID).Returns(22);
         mockMessage.SetupGet(x => x.TypeCommand).Returns("Test");
         mockMessage.SetupGet(x => x.Parameters).Returns(new Dictionary<string, object> { { "Test", 1 } });
         mockMessage.SetupGet(x => x.ObjectID).Returns(1);
@@ -80,7 +80,7 @@ public class TestInterpretCommand
         mockMessage.SetupGet(x => x.GameID).Returns(1);
         mockMessage.SetupGet(x => x.TypeCommand).Returns("Test");
         mockMessage.SetupGet(x => x.Parameters).Returns(new Dictionary<string, object> { { "Test", 1 } });
-        mockMessage.SetupGet(x => x.ObjectID).Returns(2);
+        mockMessage.SetupGet(x => x.ObjectID).Returns(22);
 
         IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Test", (object[] args) => mockCommand.Object).Execute();
 
