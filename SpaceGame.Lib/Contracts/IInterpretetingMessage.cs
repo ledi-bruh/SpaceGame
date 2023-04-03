@@ -3,8 +3,8 @@ namespace SpaceGame.Lib;
 
 public interface IInterpretetingMessage
 {
-    public int game_id { get; }
-    public int object_id { get;}
-    public string typeCommand {get;}
-    public IDictionary<string, object> args {get; }     
+    public int GameID { get; }
+    public int ObjectID { get; }
+    public string TypeCommand { get; }
+    public IDictionary<string, object> Parameters { get; }
 }
