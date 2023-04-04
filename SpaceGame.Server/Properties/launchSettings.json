@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SpaceGame.Server": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:7260;http://localhost:5295"
+    }
+  }
+}
