@@ -58,6 +58,6 @@ public class TestHttpOrderStrategy
 
         Assert.Throws<Exception>(() => IoC.Resolve<SpaceGame.Lib.ICommand>("Http.Order", messageMock.Object).Execute());
 
-        mockCommand.Verify(c => c.Execute(), Times.Never);
+        mockCommand.Verify(c => c.Execute(), Times.Never());
     }
 }
