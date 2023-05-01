@@ -39,8 +39,8 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(300);}));
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(200);}));
+        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(200); }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
@@ -65,7 +65,7 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(300);}));
+        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
@@ -97,9 +97,9 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
 
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(300);}));
-        queue.Enqueue(new ActionCommand(() => {throw new Exception();}));
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(300);}));
+        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { throw new Exception(); }));
+        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
