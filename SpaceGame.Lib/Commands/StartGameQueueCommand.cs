@@ -6,9 +6,9 @@ public class StartGameQueueCommand : ICommand
 {
     private Queue<ICommand> _queue;
 
-    private double _quantum;
+    private int _quantum;
 
-    public StartGameQueueCommand(Queue<ICommand> queue, double quantum)
+    public StartGameQueueCommand(Queue<ICommand> queue, int quantum)
     {
         _queue = queue;
         _quantum = quantum;
@@ -24,7 +24,6 @@ public class StartGameQueueCommand : ICommand
         while ((endTime.Subtract(startTime)).TotalMilliseconds <= _quantum)
         {
             var cmd = IoC.Resolve<ICommand>("Game.Queue.Dequeue", _queue);
-
             try
             {
                 cmd.Execute();

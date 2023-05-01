@@ -7,7 +7,7 @@ public class StartGameQueueCommandStrategy : IStrategy  // "Game.Command.Macro.C
     {
         var queue = (Queue<ICommand>)args[0];
 
-        var quantum = (double)args[1];
+        var quantum = (int)args[1];
 
         return new StartGameQueueCommand(queue, quantum);
     }

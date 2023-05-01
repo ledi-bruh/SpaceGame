@@ -1,16 +1,15 @@
 namespace SpaceGame.Lib;
 using Hwdtech;
+using Hwdtech.Ioc;
 
 
-public class GameCommand : ICommand
+public class GameCommand : SpaceGame.Lib.ICommand
 {
-    private Queue<ICommand> _queue;
+    private Queue<SpaceGame.Lib.ICommand> _queue;
 
     private object _scope;
 
-    double _quantum;
-
-    public GameCommand(object scope, Queue<ICommand> queue, double quantum)
+    public GameCommand(object scope, Queue<SpaceGame.Lib.ICommand> queue)
     {
         _scope = scope;
         _queue = queue;
@@ -19,8 +18,8 @@ public class GameCommand : ICommand
 
     public void Execute()
     {
-        IoC.Resolve<ICommand>("Scopes.Current.Set", _scope).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", _scope).Execute();
 
-        IoC.Resolve<ICommand>("Game.Command.Queue.Start", _queue, IoC.Resolve<double>("Game.Get.Time.Quantum")).Execute();
+        IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Command.Queue.Start", _queue, IoC.Resolve<int>("Game.Get.Time.Quantum")).Execute();
     }
 }

@@ -5,5 +5,8 @@ public class DefaultHandler : IHandler
 
     public DefaultHandler(){}
 
-    public void Handle(){}
+    public void Handle()
+    {
+        throw new Exception();
+    }
 }

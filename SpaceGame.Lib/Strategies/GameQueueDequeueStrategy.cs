@@ -6,7 +6,10 @@ public class GameQueueDequeueStrategy : IStrategy  // "Game.Command.Create.FromM
     public object Invoke(params object[] args)
     {
         var queue = (Queue<ICommand>)args[0];
-
-        return queue.Dequeue();
+        if(queue.TryDequeue(out ICommand? cmd))
+        {
+            return cmd;
+        }
+        throw new Exception();
     }
 }
