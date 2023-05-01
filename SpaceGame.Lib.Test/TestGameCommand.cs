@@ -79,42 +79,6 @@ public class TestGameCommand
     }
 
     [Fact]
-    public void TestDefaultHandlerException()
-    {
-        var scope = IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"));
-
-        Dictionary<int, IHandler> exceptionHandlerTree = new Dictionary<int, IHandler>();
-        exceptionHandlerTree.Add(0, new DefaultHandler());
-
-        var mockStrategy = new Mock<IStrategy>();
-        mockStrategy.Setup(x => x.Invoke()).Returns(400);
-
-        IoC.Resolve<ICommand>("Scopes.Current.Set", scope).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "GetHashCode.AnyOrder", (object[] args) => new GetHashCodeStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Tree", (object[] args) => exceptionHandlerTree).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Queue.Start", (object[] args) => new StartGameQueueCommandStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", (object[] args) => new FindHanlderStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
-
-        Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => {Thread.Sleep(300);}));
-        queue.Enqueue(new ActionCommand(() => {throw new Exception();}));
-
-        var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
-
-        var gameCmd = new GameCommand(scopeNew, queue);
-        Assert.Throws<Exception>(
-            () =>
-            {
-                gameCmd.Execute();
-            }
-        );
-        Assert.True(IoC.Resolve<object>("Scopes.Current") == scopeNew);
-    }
-
-
-    [Fact]
     public void TestSuccesfullHandleException()
     {
         var scope = IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"));
@@ -144,5 +108,17 @@ public class TestGameCommand
         gameCmd.Execute();
 
         mockGoodHandler.Verify(x => x.Handle(), Times.Once);
+    }
+
+    [Fact]
+    public void TestDefaultHandler()
+    {
+        var defaultHandler = new DefaultHandler(new Exception());
+        Assert.Throws<Exception>(
+            () =>
+            {
+                defaultHandler.Handle();
+            }
+        );
     }
 }

@@ -2,11 +2,12 @@ namespace SpaceGame.Lib;
 
 public class DefaultHandler : IHandler  
 {
+    private Exception _exception;
 
-    public DefaultHandler(){}
+    public DefaultHandler(Exception e) => _exception = e;
 
     public void Handle()
     {
-        throw new Exception();
+        throw _exception;
     }
 }
