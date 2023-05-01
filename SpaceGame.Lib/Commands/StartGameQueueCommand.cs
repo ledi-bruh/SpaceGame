@@ -30,7 +30,7 @@ public class StartGameQueueCommand : ICommand
             }
             catch (Exception e)
             {
-                IoC.Resolve<IHandler>("Exception.Handler.Find", new List<Type> {cmd.GetType(), e.GetType() }).Handle();
+                IoC.Resolve<IHandler>("Exception.Handler.Find", new List<Type> { cmd.GetType(), e.GetType() }).Handle();
             }
             endTime = DateTime.Now;
         }
