@@ -1,7 +1,6 @@
 namespace SpaceGame.Lib;
-using Hwdtech;
 
-public class StartGameQueueCommandStrategy : IStrategy  // "Game.Command.Macro.Create"
+public class StartGameQueueCommandStrategy : IStrategy  // "Game.Command.Queue.Start"
 {
     public object Invoke(params object[] args)
     {

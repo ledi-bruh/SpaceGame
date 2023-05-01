@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 
 
-public class GameQueueDequeueStrategy : IStrategy  // "Game.Command.Create.FromMessage"
+public class GameQueueDequeueStrategy : IStrategy  // "Game.Queue.Dequeue"
 {
     public object Invoke(params object[] args)
     {
