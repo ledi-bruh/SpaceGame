@@ -15,21 +15,11 @@ public class NewGameScopeStrategy : IStrategy  // "Game.Scope.New"
         gameScopeMap.Add(gameId, gameScope);
 
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", gameScope).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Get.Time.Quantum",
-            (object[] args) => quantum
-        ).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Push",
-            (object[] args) => new GameQueuePushCommandStrategy().Invoke(args)
-        ).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Pop",
-            (object[] args) => new GameQueuePopStrategy().Invoke(args)
-        ).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Get.UObject",
-            (object[] args) => new GetGameUObjectStrategy().Invoke(args)
-        ).Execute();
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Delete.UObject",
-            (object[] args) => new DeleteGameUObjectStrategy().Invoke(args)
-        ).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => (object)quantum).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Push", (object[] args) => new GameQueuePushCommandStrategy().Invoke(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Queue.Pop", (object[] args) => new GameQueuePopStrategy().Invoke(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Get.UObject", (object[] args) => new GetGameUObjectStrategy().Invoke(args)).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Delete.UObject", (object[] args) => new DeleteGameUObjectStrategy().Invoke(args)).Execute();
         IoC.Resolve<Hwdtech.ICommand>("Scopes.Current.Set", parentScope).Execute();
 
         return gameScope;

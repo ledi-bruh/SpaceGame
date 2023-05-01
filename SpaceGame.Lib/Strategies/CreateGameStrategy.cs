@@ -16,8 +16,8 @@ public class CreateGameStrategy : IStrategy  // "Game.Create"
         var commandsList = new List<ICommand> { gameCommand };
         var macroCommand = IoC.Resolve<ICommand>("Game.Command.Macro", commandsList);
         var injectCommand = IoC.Resolve<ICommand>("Game.Command.Inject", macroCommand);
-        var repeatCommand = IoC.Resolve<ICommand>("Game.Command.Repeat", injectCommand);
-        commandsList.Add(repeatCommand);
+        var repeatConcurrentCommand = IoC.Resolve<ICommand>("Command.Concurrent.Repeat", injectCommand);
+        commandsList.Add(repeatConcurrentCommand);
 
         var gameMap = IoC.Resolve<IDictionary<string, ICommand>>("Game.Map");
         gameMap.Add(gameId, injectCommand);
