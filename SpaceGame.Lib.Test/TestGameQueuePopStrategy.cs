@@ -23,7 +23,6 @@ public class TestGameQueuePopStrategy
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Map", (object[] args) => gameQueueMap).Execute();
 
         var mockCommand = new Mock<Lib.ICommand>();
-        mockCommand.Setup(x => x.Execute()).Verifiable();
         var queue = new Queue<Lib.ICommand>();
         queue.Enqueue(mockCommand.Object);
         gameQueueMap.Add(0, queue);
