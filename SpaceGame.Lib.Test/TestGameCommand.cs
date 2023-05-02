@@ -22,7 +22,7 @@ public class TestGameCommand
         queue.Enqueue(new EmptyCommand());
 
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
-        
+
         IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Queue.Dequeue", queue).Execute();
 
         Assert.True(queue.Count() == 0);
@@ -116,9 +116,6 @@ public class TestGameCommand
     public void TestDefaultHandler()
     {
         var scope = IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"));
-
-        var mockGoodHandler = new Mock<IHandler>();
-        mockGoodHandler.Setup(x => x.Handle()).Verifiable();
 
         IoC.Resolve<ICommand>("Scopes.Current.Set", scope).Execute();
 
