@@ -13,7 +13,6 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("Scopes.Current.Set",
             IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))
         ).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
     }
 
     [Fact]
@@ -21,6 +20,9 @@ public class TestGameCommand
     {
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
         queue.Enqueue(new EmptyCommand());
+
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
+        
         IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Queue.Dequeue", queue).Execute();
 
         Assert.True(queue.Count() == 0);
@@ -138,7 +140,10 @@ public class TestGameCommand
         var gameCmd = new GameCommand(scopeNew, queue);
 
         Assert.Throws<Exception>(
-            () => { gameCmd.Execute(); }
+            () => 
+            { 
+                gameCmd.Execute(); 
+            }
         );
     }
 }
