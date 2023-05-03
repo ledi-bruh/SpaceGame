@@ -6,8 +6,6 @@ public class StartGameQueueCommandStrategy : IStrategy  // "Game.Command.Queue.S
     {
         var queue = (Queue<ICommand>)args[0];
 
-        var quantum = (int)args[1];
-
-        return new StartGameQueueCommand(queue, quantum);
+        return new StartGameQueueCommand(queue);
     }
 }

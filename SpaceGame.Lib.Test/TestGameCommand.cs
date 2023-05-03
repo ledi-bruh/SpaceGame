@@ -37,12 +37,19 @@ public class TestGameCommand
         var mockStrategy = new Mock<IStrategy>();
         mockStrategy.Setup(x => x.Invoke()).Returns(400);
 
+        var cmd = new ActionCommand(() =>
+        {
+            mockStrategy.Setup(x => x.Invoke()).Returns(0);
+        });
+
         IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Queue.Start", (object[] args) => new StartGameQueueCommandStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(200); }));
+
+        queue.Enqueue(cmd);
+        queue.Enqueue(new ActionCommand(() => { }));
+        queue.Enqueue(new ActionCommand(() => { }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
@@ -50,7 +57,7 @@ public class TestGameCommand
 
         gameCmd.Execute();
 
-        Assert.True(queue.Count() == 0);
+        Assert.True(queue.Count == 2);
     }
 
     [Fact]
@@ -67,7 +74,7 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
@@ -93,15 +100,18 @@ public class TestGameCommand
         var mockStrategy = new Mock<IStrategy>();
         mockStrategy.Setup(x => x.Invoke()).Returns(400);
 
+
+
+
         IoC.Resolve<ICommand>("IoC.Register", "Game.Command.Queue.Start", (object[] args) => new StartGameQueueCommandStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Dequeue", (object[] args) => new GameQueueDequeueStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Exception.Handler.Find", (object[] args) => mockGoodHandler.Object).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
 
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { }));
         queue.Enqueue(new ActionCommand(() => { throw new Exception(); }));
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { mockStrategy.Setup(x => x.Invoke()).Returns(0); }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
@@ -128,18 +138,18 @@ public class TestGameCommand
         IoC.Resolve<ICommand>("IoC.Register", "Game.Get.Time.Quantum", (object[] args) => mockStrategy.Object.Invoke(args)).Execute();
 
         Queue<SpaceGame.Lib.ICommand> queue = new Queue<SpaceGame.Lib.ICommand>();
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { }));
         queue.Enqueue(new ActionCommand(() => { throw new Exception(); }));
-        queue.Enqueue(new ActionCommand(() => { Thread.Sleep(300); }));
+        queue.Enqueue(new ActionCommand(() => { mockStrategy.Setup(x => x.Invoke()).Returns(0); }));
 
         var scopeNew = IoC.Resolve<object>("Scopes.New", scope);
 
         var gameCmd = new GameCommand(scopeNew, queue);
 
         Assert.Throws<Exception>(
-            () => 
-            { 
-                gameCmd.Execute(); 
+            () =>
+            {
+                gameCmd.Execute();
             }
         );
     }
