@@ -1,6 +1,5 @@
-using Hwdtech;
-
 namespace SpaceGame.Lib;
+using Hwdtech;
 
 public class GameRegisterCommandsCommand : ICommand 
 {
@@ -10,7 +9,7 @@ public class GameRegisterCommandsCommand : ICommand
 
         dependencies.ToList().ForEach(x =>
         {
-            IoC.Resolve<ICommand>("IoC.Register", "Game.Command." + x.Key, x.Value).Execute();
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Command." + x.Key,(object[] args) => x.Value.Invoke(args)).Execute();
         });
     }
 }
