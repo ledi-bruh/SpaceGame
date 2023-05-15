@@ -1,8 +1,8 @@
 namespace SpaceGame.Lib;
+using System;
 using System.Collections;
 using Vector;
 using Hwdtech;
-using System;
 
 public class PositionIterator : IEnumerator<Vector>
 {

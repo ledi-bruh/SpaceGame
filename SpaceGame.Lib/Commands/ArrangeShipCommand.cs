@@ -16,7 +16,6 @@ public class ArrangeShipCommand : ICommand  // "Game.Arrange.Ship"
     public void Execute()
     {
         IoC.Resolve<ICommand>("Game.UObject.SetProperty", _gameUObject, "Position", _positionEnumerator.Current).Execute();
-        IoC.Resolve<ICommand>("Game.UObject.SetProperty", _gameUObject, "Fuel", 100.0).Execute();
         _positionEnumerator.MoveNext();
     }
 }
