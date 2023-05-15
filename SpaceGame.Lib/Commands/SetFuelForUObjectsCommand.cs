@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 using Hwdtech;
 
-public class SetFuelForUObjectsCommand : ICommand  // "Game.UObjects.Set.Fuel"
+public class SetFuelForUObjectsCommand : ICommand  // "Game.UObject.Collection.Set.Fuel"
 {
     private IEnumerable<IUObject> _gameUObjects;
     private double _fuelVolume;
