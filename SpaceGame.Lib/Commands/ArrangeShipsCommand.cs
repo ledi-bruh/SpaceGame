@@ -11,7 +11,7 @@ public class ArrangeShipsCommand : ICommand  // "Game.Arrange.Ships"
     {
         var positionIterator = IoC.Resolve<IEnumerator<object>>("Game.Iterator.Position");
 
-        _gameUObjects.ToList().ForEach(ship => IoC.Resolve<ICommand>("Game.Arrange.Ship", ship, positionIterator));
+        _gameUObjects.ToList().ForEach(ship => IoC.Resolve<ICommand>("Game.Arrange.Ship", ship, positionIterator).Execute());
 
         positionIterator.Reset();
     }
