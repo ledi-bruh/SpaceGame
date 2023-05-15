@@ -1,6 +1,5 @@
 namespace SpaceGame.Lib.Test;
 using Vector;
-using Moq;
 using Hwdtech;
 using Hwdtech.Ioc;
 
@@ -14,23 +13,41 @@ public class TestPositionIterator
             IoC.Resolve<object>("Scopes.New", IoC.Resolve<object>("Scopes.Root"))
         ).Execute();
     }
+
     [Fact]
-    public void Test1()
+    public void SuccessfulIterating()
     {
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Positions", (object[] args) => new List<Vector>{
+        var positions = new List<Vector>{
             new Vector(0, 0),
             new Vector(1, 0),
-            new Vector(2, 0),
-        }).Execute();
+        };
+
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Positions", (object[] args) => positions).Execute();
         var iterator = new PositionIterator();
-        var a = iterator.Current;
-        var b = iterator.MoveNext();
-        a = iterator.Current;
-        b = iterator.MoveNext();
-        a = iterator.Current;
-        b = iterator.MoveNext();
-        b = iterator.MoveNext();
-        b = iterator.MoveNext();
-        // a = iterator.Current;
+
+        Assert.Equal(positions[0], iterator.Current);
+        Assert.True(iterator.MoveNext());
+        Assert.Equal(positions[1], iterator.Current);
+        Assert.False(iterator.MoveNext());
+
+        iterator.Reset();
+        Assert.Equal(positions[0], iterator.Current);
+
+        Assert.Throws<NotImplementedException>(() => iterator.Dispose());
+    }
+
+    [Fact]
+    public void IteratingThrowsOutOfRangeException()
+    {
+        var positions = new List<Vector>{
+            new Vector(0, 0),
+        };
+
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Positions", (object[] args) => positions).Execute();
+        var iterator = new PositionIterator();
+
+        Assert.Equal(positions[0], iterator.Current);
+        Assert.False(iterator.MoveNext());
+        Assert.Throws<ArgumentOutOfRangeException>(() => iterator.Current);
     }
 }

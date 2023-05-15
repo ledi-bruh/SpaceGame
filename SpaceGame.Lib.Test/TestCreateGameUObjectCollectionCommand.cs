@@ -27,6 +27,6 @@ public class TestCreateGameUObjectCollectionCommand
 
         Assert.Empty(gameUObjectMap);
         IoC.Resolve<Lib.ICommand>("Game.UObject.Collection.Create", 10).Execute();
-        Assert.Equal(gameUObjectMap.Count, 10);
+        Assert.Equal(10, gameUObjectMap.Count);
     }
 }

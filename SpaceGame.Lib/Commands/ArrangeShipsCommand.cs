@@ -1,5 +1,4 @@
 namespace SpaceGame.Lib;
-using Vector;
 using Hwdtech;
 
 public class ArrangeShipsCommand : ICommand  // "Game.Arrange.Ships"
@@ -10,7 +9,7 @@ public class ArrangeShipsCommand : ICommand  // "Game.Arrange.Ships"
 
     public void Execute()
     {
-        var positionIterator = IoC.Resolve<IEnumerator<Vector>>("Game.Iterator.Position");
+        var positionIterator = IoC.Resolve<IEnumerator<object>>("Game.Iterator.Position");
 
         _gameUObjects.ToList().ForEach(ship => IoC.Resolve<ICommand>("Game.Arrange.Ship", ship, positionIterator));
 
