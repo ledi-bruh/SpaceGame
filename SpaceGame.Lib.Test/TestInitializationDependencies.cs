@@ -25,7 +25,7 @@ public class TestInitializationDependencies
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Push", (object[] args) => new ActionCommand(() => { gameQueue.Enqueue((SpaceGame.Lib.ICommand)args[1]); })).Execute();
 
         IoC.Resolve<ICommand>("IoC.Register", "Game.Register.Commands", (object[] args) => new GameRegisterCommandsStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Operation.Create", (object[] args) => new CreateGameOperationStrategy().Invoke(args)).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Macro.Create.FromDependencies", (object[] args) => new CreateGameMacroFromDependenciesStrategy().Invoke(args)).Execute();
 
         var commandsDependencies = new Dictionary<string, IStrategy>();
 
@@ -60,7 +60,7 @@ public class TestInitializationDependencies
         IoC.Resolve<ICommand>("IoC.Register", "Game.Queue.Push", (object[] args) => new ActionCommand(() => { gameQueue.Enqueue((SpaceGame.Lib.ICommand)args[1]); })).Execute();
 
         IoC.Resolve<ICommand>("IoC.Register", "Game.Register.Commands", (object[] args) => new GameRegisterCommandsStrategy().Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register", "Game.Operation.Create", (object[] args) => new CreateGameOperationStrategy().Invoke(args)).Execute();
+        IoC.Resolve<ICommand>("IoC.Register", "Game.Macro.Create.FromDependencies", (object[] args) => new CreateGameMacroFromDependenciesStrategy().Invoke(args)).Execute();
 
         var commandsDependencies = new Dictionary<string, IStrategy>();
 

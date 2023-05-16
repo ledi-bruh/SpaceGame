@@ -11,7 +11,7 @@ public class InitializationGameDependenciesStrategy : IStrategy //Server.Thread.
 
         var cmdRegisterOperationCreation = new ActionCommand(() =>
         {
-            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Operation.Create", (object[] args) => new CreateGameOperationStrategy().Invoke(args));
+            IoC.Resolve<Hwdtech.ICommand>("IoC.Register", "Game.Macro.Create.FromDependencies", (object[] args) => new CreateGameMacroFromDependenciesStrategy().Invoke(args));
         });
 
         return new ActionCommand( () =>
