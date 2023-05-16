@@ -28,7 +28,7 @@ public class TestRegisterGameCommands
         new GameRegisterCommandsCommand().Execute();
 
         var mockStartable = new Mock<IStartable>();
-        IoC.Resolve<ICommand>("IoC.Register","Game.Adapter.Create", (object[] args) => mockStartable.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Adapter.Create", (object[] args) => mockStartable.Object).Execute();
         
         Mock<IUObject> mockIUObject = new Mock<IUObject>();
 
@@ -41,7 +41,7 @@ public class TestRegisterGameCommands
         ).Execute();
 
         var mockEndable = new Mock<IEndable>();
-        IoC.Resolve<ICommand>("IoC.Register","Game.Adapter.Create", (object[] args) => mockEndable.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Adapter.Create", (object[] args) => mockEndable.Object).Execute();
 
         cmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Command.EndMovement", mockIUObject.Object);
 
@@ -53,7 +53,7 @@ public class TestRegisterGameCommands
         ).Execute();
 
         var mockShootable = new Mock<IShootable>();
-        IoC.Resolve<ICommand>("IoC.Register","Game.Adapter.Create", (object[] args) => mockShootable.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Adapter.Create", (object[] args) => mockShootable.Object).Execute();
 
         cmd = IoC.Resolve<SpaceGame.Lib.ICommand>("Game.Command.Shoot", mockIUObject.Object);
 
@@ -75,7 +75,7 @@ public class TestRegisterGameCommands
 
         IoC.Resolve<ICommand>("IoC.Register","Game.Queue.Push", (object[] args) => new ActionCommand( () => queue.Enqueue((SpaceGame.Lib.ICommand)args[1]))).Execute();
         IoC.Resolve<ICommand>("IoC.Register","Game.Get.GameId", (object[] args) => mockGetId.Object.Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register","Game.IUObject.Shoot", (object[] args) => mockCmd.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Shoot", (object[] args) => mockCmd.Object).Execute();
 
         new ShootCommand(mockShootable.Object).Execute();
 

@@ -12,8 +12,8 @@ public class CreateGameOperationStrategy: IStrategy //Game.Operation.Create
 
         var dependencies = IoC.Resolve<IEnumerable<string>>("Game.Dependencies.Get.Operation." + type);
 
-        var commandList = dependencies.ToList().Select(x => IoC.Resolve<ICommand>("Game.Command." + x, obj));
+        var commands = dependencies.ToList().Select(x => IoC.Resolve<ICommand>("Game.Command." + x, obj)).ToList();
 
-        return IoC.Resolve<ICommand>("Game.Command.Macro", commandList);
+        return IoC.Resolve<ICommand>("Game.Command.Macro", commands);
     }
 }

@@ -3,7 +3,7 @@ using Hwdtech;
 namespace SpaceGame.Lib;
 
 
-public class InitializationGameDependenciesStrategy : IStrategy //Server.Thread.Game.Dependencie.Initialization
+public class InitializationGameDependenciesStrategy : IStrategy //Server.Thread.Game.Dependencies.Initialization
 {
     public object Invoke(params object[] args)
     {

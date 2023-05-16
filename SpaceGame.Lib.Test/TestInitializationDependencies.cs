@@ -40,7 +40,7 @@ public class TestInitializationDependencies
         gameQueue.Dequeue().Execute();
 
         Mock<IRotatable> mockRotatable = new Mock<IRotatable>();
-        IoC.Resolve<ICommand>("IoC.Register","Game.Adapter.Create", (object[] args) => mockRotatable.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Adapter.Create", (object[] args) => mockRotatable.Object).Execute();
         
         Mock<IUObject> mockIUObject = new Mock<IUObject>();
 
