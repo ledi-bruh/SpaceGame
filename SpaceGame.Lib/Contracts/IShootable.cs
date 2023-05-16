@@ -3,7 +3,7 @@ namespace SpaceGame.Lib;
 
 public interface IShootable
 {
-    IDictionary<string, int> Bullets
+    IDictionary<string, int> Ammo
     {
         get;
         set;
