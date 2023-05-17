@@ -67,15 +67,18 @@ public class TestRegisterGameCommands
         var queue = new Queue<SpaceGame.Lib.ICommand>();
 
         var mockCmd = new Mock<SpaceGame.Lib.ICommand>();
-
+        
         var mockShootable = new Mock<IShootable>();
 
         var mockGetId = new Mock<IStrategy>();
+
+        var mockObject = new Mock<object>();
         mockGetId.Setup(x => x.Invoke()).Returns(1).Verifiable();
 
         IoC.Resolve<ICommand>("IoC.Register","Game.Queue.Push", (object[] args) => new ActionCommand( () => queue.Enqueue((SpaceGame.Lib.ICommand)args[1]))).Execute();
         IoC.Resolve<ICommand>("IoC.Register","Game.Get.GameId", (object[] args) => mockGetId.Object.Invoke(args)).Execute();
-        IoC.Resolve<ICommand>("IoC.Register","Game.UObject.Shoot", (object[] args) => mockCmd.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.Create.Projectile", (object[] args) => mockObject.Object).Execute();
+        IoC.Resolve<ICommand>("IoC.Register","Game.Create.Projectile.Command.Move", (object[] args) => mockCmd.Object).Execute();
 
         new ShootCommand(mockShootable.Object).Execute();
 

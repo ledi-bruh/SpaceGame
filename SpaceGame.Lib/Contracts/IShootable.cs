@@ -1,9 +1,19 @@
 namespace SpaceGame.Lib;
-
+using Vector;
 
 public interface IShootable
 {
-    IDictionary<string, int> Ammo
+    string AmmoType
+    {
+        get;
+        set;
+    }
+    Vector projectilePosition
+    {
+        get;
+        set;
+    }
+    Vector projectileVelocity
     {
         get;
         set;
