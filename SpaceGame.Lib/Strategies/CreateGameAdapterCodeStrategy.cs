@@ -1,7 +1,5 @@
 namespace SpaceGame.Lib;
-
 using Hwdtech;
-
 
 
 public class CreateGameAdapterCodeStrategy : IStrategy //"Game.Adapter.Code"

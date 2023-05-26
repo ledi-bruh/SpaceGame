@@ -1,6 +1,7 @@
 namespace SpaceGame.Lib;
 using Scriban;
 
+
 public class AdapterBulider : IBulider
 {
     Type _typeOld;
