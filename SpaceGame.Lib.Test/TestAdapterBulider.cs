@@ -21,12 +21,12 @@ public class TestAdapterBulider
     {
         IoC.Resolve<ICommand>("IoC.Register", "Game.Bulider.Adapter", (object[] args) => new GetGameBuliderAdapterStrategy().Invoke(args)).Execute();
         IoC.Resolve<ICommand>("IoC.Register", "Game.Adapter.Code", (object[] args) => new CreateGameAdapterCodeStrategy().Invoke(args)).Execute();
-        
+
         var typeOld = typeof(IUObject);
         var typeNew = typeof(IRotatable);
 
         var result = IoC.Resolve<string>("Game.Adapter.Code", typeOld, typeNew);
-        
+
         var expected = @"public class IRotatableAdapter : IRotatable {
 
         IUObject _obj;

@@ -37,9 +37,11 @@ public class AdapterBulider : IBulider
     {{end}}
     }";
         var template = Template.Parse(templateString);
-        var result = template.Render(new {new_type_name = _typeNew.Name,
-        old_type_name = _typeOld.Name,
-        properties_new = propertiesNew,
+        var result = template.Render(new
+        {
+            new_type_name = _typeNew.Name,
+            old_type_name = _typeOld.Name,
+            properties_new = propertiesNew,
         });
         return result;
     }

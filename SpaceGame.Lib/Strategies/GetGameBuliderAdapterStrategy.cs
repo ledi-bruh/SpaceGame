@@ -1,7 +1,5 @@
 namespace SpaceGame.Lib;
 
-using Hwdtech;
-
 
 public class GetGameBuliderAdapterStrategy : IStrategy //"Game.Bulider.Adapter"
 {
