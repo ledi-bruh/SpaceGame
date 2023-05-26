@@ -13,9 +13,10 @@ public class CreateInstanceAdapterStrategy : IStrategy  // "Game.Adapter"
 
         if (!gameAdapterMap.TryGetValue(pair, out var adapterStrategyName))
         {
-            return IoC.Resolve<object>("Game.Adapter.Map.Default", uObject, targetType);
+            IoC.Resolve<ICommand>("Compile.Adapter", targetType).Execute();
+            IoC.Resolve<ICommand>("Game.Adapter.Register", uObject, targetType).Execute();
         }
 
-        return IoC.Resolve<object>(adapterStrategyName, uObject, targetType);
+        return IoC.Resolve<object>(gameAdapterMap[pair], uObject, targetType);
     }
 }
