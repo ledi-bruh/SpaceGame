@@ -3,8 +3,8 @@ using Hwdtech;
 
 public class GameAdapterRegisterCommand : ICommand
 {
-    IUObject _uObject;
-    Type _targetType;
+    private IUObject _uObject;
+    private Type _targetType;
 
     public GameAdapterRegisterCommand(IUObject uObject, Type targetType)
     {
@@ -19,6 +19,6 @@ public class GameAdapterRegisterCommand : ICommand
         var adapterStrategyName = _targetType.ToString() + "Adapter";
 
         gameAdapterMap.Add(pair, adapterStrategyName);
-        IoC.Resolve<Hwdtech.ICommand>("Register", adapterStrategyName, (object[] args) => Activator.CreateInstance((Type)args[1], args[0])).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterStrategyName, (object[] args) => Activator.CreateInstance((Type)args[1], args[0])).Execute();
     }
 }
