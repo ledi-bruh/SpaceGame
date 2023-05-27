@@ -1,4 +1,5 @@
 namespace SpaceGame.Lib;
+using System.Reflection;
 using Hwdtech;
 
 public class CreateGameAdapterStrategy : IStrategy  // "Game.Adapter.Create"
@@ -8,15 +9,14 @@ public class CreateGameAdapterStrategy : IStrategy  // "Game.Adapter.Create"
         var uObject = (IUObject)args[0];
         var targetType = (Type)args[1];
 
-        var gameAdapterMap = IoC.Resolve<IDictionary<KeyValuePair<Type, Type>, string>>("Game.Adapter.Map");
+        var adapterAssemblyMap = IoC.Resolve<IDictionary<KeyValuePair<Type, Type>, Assembly>>("Game.Adapter.Assembly.Map");
         var pair = new KeyValuePair<Type, Type>(uObject.GetType(), targetType);
 
-        if (!gameAdapterMap.TryGetValue(pair, out var adapterStrategyName))
+        if (!adapterAssemblyMap.TryGetValue(pair, out var assembly))
         {
-            IoC.Resolve<ICommand>("Compile.Adapter", targetType).Execute();
-            IoC.Resolve<ICommand>("Game.Adapter.Register", uObject, targetType).Execute();
+            IoC.Resolve<ICommand>("Game.Adapter.Compile", uObject.GetType(), targetType).Execute();
         }
 
-        return IoC.Resolve<object>(gameAdapterMap[pair], uObject);
+        return IoC.Resolve<object>("Game.Adapter.Find", uObject, targetType);
     }
 }
