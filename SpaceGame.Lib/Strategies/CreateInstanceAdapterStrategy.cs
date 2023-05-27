@@ -17,6 +17,6 @@ public class CreateInstanceAdapterStrategy : IStrategy  // "Game.Adapter"
             IoC.Resolve<ICommand>("Game.Adapter.Register", uObject, targetType).Execute();
         }
 
-        return IoC.Resolve<object>(gameAdapterMap[pair], uObject, targetType);
+        return IoC.Resolve<object>(gameAdapterMap[pair], uObject);
     }
 }

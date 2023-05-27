@@ -7,6 +7,6 @@ public class CompileAdapterStrategy : IStrategy  // "Compile.Adapter"
     {
         var targetType = (Type)args[0];
 
-        return IoC.Resolve<ICommand>("Compile", IoC.Resolve<ICommand>("Game.Adapter.Code", targetType));
+        return IoC.Resolve<ICommand>("Compile", IoC.Resolve<string>("Game.Adapter.Code", targetType));
     }
 }

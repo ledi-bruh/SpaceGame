@@ -1,4 +1,5 @@
 namespace SpaceGame.Lib;
+using System.Reflection;
 using Hwdtech;
 
 public class GameAdapterRegisterCommand : ICommand
@@ -19,6 +20,12 @@ public class GameAdapterRegisterCommand : ICommand
         var adapterStrategyName = _targetType.ToString() + "Adapter";
 
         gameAdapterMap.Add(pair, adapterStrategyName);
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterStrategyName, (object[] args) => Activator.CreateInstance((Type)args[1], args[0])).Execute();
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterStrategyName,
+            (object[] args) => {
+                var assembly = Assembly.Load("SpaceGame.Lib");
+                var adapterClassType = assembly.GetType(adapterStrategyName);
+                return Activator.CreateInstance(adapterClassType!, args[0]);
+            }
+        ).Execute();
     }
 }
