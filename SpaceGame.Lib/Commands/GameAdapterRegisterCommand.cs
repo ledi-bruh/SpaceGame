@@ -17,13 +17,12 @@ public class GameAdapterRegisterCommand : ICommand
     {
         var gameAdapterMap = IoC.Resolve<IDictionary<KeyValuePair<Type, Type>, string>>("Game.Adapter.Map");
         var pair = new KeyValuePair<Type, Type>(_uObject.GetType(), _targetType);
-        var adapterStrategyName = _targetType.ToString() + "Adapter";
+        var adapterName = IoC.Resolve<string>("Game.Adapter.Name.Create", _targetType);
 
-        gameAdapterMap.Add(pair, adapterStrategyName);
-        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterStrategyName,
+        gameAdapterMap.Add(pair, adapterName);
+        IoC.Resolve<Hwdtech.ICommand>("IoC.Register", adapterName,
             (object[] args) => {
-                var assembly = Assembly.Load("SpaceGame.Lib");
-                var adapterClassType = assembly.GetType(adapterStrategyName);
+                var adapterClassType = IoC.Resolve<Assembly>("Assembly").GetType(adapterName);
                 return Activator.CreateInstance(adapterClassType!, args[0]);
             }
         ).Execute();

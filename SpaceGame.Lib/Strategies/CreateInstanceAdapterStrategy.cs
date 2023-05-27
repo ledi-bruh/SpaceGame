@@ -1,7 +1,7 @@
 namespace SpaceGame.Lib;
 using Hwdtech;
 
-public class CreateInstanceAdapterStrategy : IStrategy  // "Game.Adapter"
+public class CreateGameAdapterStrategy : IStrategy  // "Game.Adapter.Create"
 {
     public object Invoke(params object[] args)
     {
