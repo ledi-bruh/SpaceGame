@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hwdtech.Ioc.ScopeBasedIoCImplementation" Version="1.0.0" />
+    <PackageReference Include="Scriban" Version="5.7.0" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="4.6.0" />
   </ItemGroup>
 
